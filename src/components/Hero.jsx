@@ -1,6 +1,8 @@
 'use client';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Button, Heading, Text, Flex } from '@radix-ui/themes';
 
 export default function Hero() {
   return (
@@ -16,19 +18,29 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="flex-1 space-y-6 text-center md:text-left"
         >
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--color-primary)] drop-shadow-lg">
+          <Heading as="h1" size="8" color="accent">
             Hi, I'm Zainab 👋
-          </h1>
-          <p className="text-lg sm:text-xl text-[var(--color-secondary)] max-w-xl mx-auto md:mx-0">
-            A passionate tech enthusiast blending creativity, code, and strategy. I build modern websites, apps, and AI-powered tools to make life smarter and more fun.
-          </p>
-          <a
-            href="#projects"
-            aria-label="View my work projects"
-            className="inline-block bg-[var(--color-accent)] text-white font-semibold px-6 py-3 rounded-xl hover:bg-pink-600 transition duration-300 shadow-lg hover:scale-105 transform"
-          >
-            View My Work 🚀
-          </a>
+          </Heading>
+
+          <Text as="p" size="4" color="gray" className="max-w-xl mx-auto md:mx-0">
+            A passionate tech enthusiast blending creativity, code, and strategy. I build modern websites,
+            apps, and AI-powered tools to make life smarter and more fun.
+          </Text>
+
+          <Flex justify="center" md={{ justify: 'start' }}>
+            <Button
+              size="3"
+              radius="large"
+              variant="solid"
+              highContrast
+              onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              aria-label="View my work projects"
+            >
+              View My Work 🚀
+            </Button>
+          </Flex>
         </motion.div>
 
         {/* Profile Image */}

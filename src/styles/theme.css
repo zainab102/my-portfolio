@@ -1,11 +1,11 @@
+/* theme.css */
+
 /* Typography & Font Families */
 :root {
   --font-sans: "Inter", sans-serif;
   --font-display: "Poppins", sans-serif;
-}
 
-/* Color Palette */
-:root {
+  /* Color Palette */
   --color-bg: #0f172a; /* dark navy */
   --color-surface: #1e293b; /* card background */
   --color-primary: #facc15; /* yellow */
@@ -51,14 +51,18 @@
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #facc15, #f472b6);
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-accent)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Badges */
 .badge {
-  @apply inline-block text-xs px-3 py-1 rounded-full font-semibold;
+  @apply inline-block text-xs px-3 py-1 rounded-full font-semibold select-none;
 }
 
 .badge-primary {
@@ -75,11 +79,11 @@
 }
 
 .section-header {
-  @apply text-4xl font-bold text-center text-white mb-10;
+  @apply text-4xl font-bold text-center text-white mb-10 font-[var(--font-display)];
 }
 
 .section-subheader {
-  @apply text-xl text-[var(--color-secondary)] text-center mb-6;
+  @apply text-xl text-[var(--color-secondary)] text-center mb-6 font-[var(--font-sans)];
 }
 
 /* Form Elements */

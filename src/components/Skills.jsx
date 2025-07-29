@@ -1,4 +1,4 @@
-import { Badge } from '@floatui/react';
+'use client';
 
 export default function Skills() {
   const technicalSkills = [
@@ -41,18 +41,18 @@ export default function Skills() {
             <h3 className="text-2xl font-semibold mb-6 text-[var(--color-accent)]">
               Technical Skills
             </h3>
-            <div className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-3" aria-label="Technical Skills list">
               {technicalSkills.map((skill, idx) => (
-                <Badge
-                  key={idx}
-                  variant="solid"
-                  color="primary"
-                  className="cursor-default text-sm px-4 py-2 rounded-full hover:scale-105 transition-transform duration-200"
-                >
-                  {skill}
-                </Badge>
+                <li key={idx}>
+                  <span
+                    className="badge-solid cursor-default text-sm px-4 py-2 rounded-full"
+                    aria-label={`Technical skill: ${skill}`}
+                  >
+                    {skill}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Soft Skills */}
@@ -60,18 +60,18 @@ export default function Skills() {
             <h3 className="text-2xl font-semibold mb-6 text-[var(--color-accent)]">
               Soft Skills
             </h3>
-            <div className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-3" aria-label="Soft Skills list">
               {softSkills.map((skill, idx) => (
-                <Badge
-                  key={idx}
-                  variant="outline"
-                  color="secondary"
-                  className="cursor-default text-sm px-4 py-2 rounded-full hover:bg-[var(--color-accent)] hover:text-white transition-colors duration-200"
-                >
-                  {skill}
-                </Badge>
+                <li key={idx}>
+                  <span
+                    className="badge-outline cursor-default text-sm px-4 py-2 rounded-full"
+                    aria-label={`Soft skill: ${skill}`}
+                  >
+                    {skill}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

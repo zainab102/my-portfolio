@@ -1,64 +1,94 @@
 'use client';
+
 import { useState } from 'react';
+import { Button, Input, Textarea, Heading, Flex, Text } from '@radix-ui/themes';
 
 export default function Contact() {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [status, setStatus] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setStatus('Sending...');
+
+    setTimeout(() => {
+      setStatus('Thank you for reaching out! I will get back to you soon.');
+      setFormData({ name: '', email: '', message: '' });
+    }, 1500);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-100 py-10 px-6">
-      <div className="max-w-2xl mx-auto bg-white p-10 rounded-xl shadow-xl">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Me</h2>
+    <section id="contact" className="bg-[var(--color-contact-bg)] text-white py-20 px-6 md:px-12">
+      <div className="max-w-4xl mx-auto">
+        <Heading as="h2" size="8" className="text-center text-[var(--color-accent)] mb-12">
+          Get in Touch
+        </Heading>
 
-        {formSubmitted ? (
-          <p className="text-green-600 text-center text-lg font-medium">
-            ✅ Thanks! Your message has been sent.
-          </p>
-        ) : (
-          <form
-            action="https://formspree.io/f/mgvzkepb"
-            method="POST"
-            onSubmit={() => setFormSubmitted(true)}
-            className="space-y-6"
-          >
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Your Name</label>
-              <input
-                type="text"
-                name="name"
-                required
-                className="mt-1 p-3 w-full border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-6 max-w-xl mx-auto"
+          aria-label="Contact form"
+          noValidate
+        >
+          <Input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            aria-required="true"
+            aria-label="Your name"
+          />
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Your Email</label>
-              <input
-                type="email"
-                name="email"
-                required
-                className="mt-1 p-3 w-full border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
+          <Input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            aria-required="true"
+            aria-label="Your email address"
+          />
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Message</label>
-              <textarea
-                name="message"
-                rows="5"
-                required
-                className="mt-1 p-3 w-full border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              ></textarea>
-            </div>
+          <Textarea
+            name="message"
+            placeholder="Your Message"
+            rows={5}
+            value={formData.message}
+            onChange={handleChange}
+            required
+            aria-required="true"
+            aria-label="Your message"
+          />
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors"
-            >
+          <Flex justify="center">
+            <Button type="submit" size="4" radius="large" color="violet">
               Send Message
-            </button>
-          </form>
-        )}
+            </Button>
+          </Flex>
+
+          {status && (
+            <Text size="3" className="text-center text-[var(--color-primary)] mt-4" role="alert">
+              {status}
+            </Text>
+          )}
+        </form>
       </div>
-    </div>
+    </section>
   );
 }

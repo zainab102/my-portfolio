@@ -1,141 +1,93 @@
-import { Card, Button } from '@floatui/react';
+'use client';
+
+import { Card, Flex, Heading, Text, Button } from '@radix-ui/themes';
+import { ExternalLinkIcon } from '@radix-ui/react-icons';
+import { motion } from 'framer-motion';
+
+const projects = [
+  {
+    title: 'AI Resume Generator',
+    description: 'AI-powered resume builder using OpenAI API and TailwindCSS to generate professional CVs instantly.',
+    link: 'https://github.com/zainab102/ai-resume-generator',
+    tech: ['React', 'OpenAI', 'TailwindCSS'],
+  },
+  {
+    title: 'Task Manager Dashboard',
+    description: 'Full-stack CRUD app with user authentication, live updates, and elegant dark UI.',
+    link: 'https://github.com/zainab102/task-manager',
+    tech: ['MongoDB', 'Express', 'React', 'Node.js'],
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'This site you’re on! Built with Next.js, Tailwind, Radix UI, and modern web practices.',
+    link: 'https://github.com/zainab102/my-portfolio',
+    tech: ['Next.js', 'Tailwind', 'Radix UI'],
+  },
+];
 
 export default function Projects() {
   return (
-    <section
-      id="projects"
-      className="bg-[var(--color-projects-bg)] text-white max-w-6xl mx-auto px-6 py-20 rounded-xl shadow-lg"
-    >
-      <h2 className="text-4xl font-bold mb-12 text-center text-[var(--color-primary)]">
-        Projects
-      </h2>
+    <section id="projects" className="bg-gray-950 text-white py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <Heading as="h2" size="8" className="text-center text-violet-400 mb-12">
+          Projects
+        </Heading>
 
-      <div className="space-y-12">
-        {/* Web Development */}
-        <Card className="p-6 hover:scale-[1.03] hover:shadow-2xl transition-transform duration-300 rounded-2xl bg-white/10 border border-white/20">
-          <h3 className="text-2xl font-semibold text-[var(--color-accent)] mb-6">
-            Web Development (React.js)
-          </h3>
-          <ul className="list-disc list-inside space-y-3 text-white/80">
-            <li>
-              <strong>Netflix Clone:</strong> Streaming interface clone with
-              custom UI and routing
-            </li>
-            <li>
-              <strong>YouTube Clone:</strong> Video platform clone with search
-              and recommendations
-            </li>
-            <li>
-              <strong>Gym App:</strong> Fitness tracker and workout planner
-            </li>
-            <li>
-              <strong>To-Do List App:</strong> Task management app with filters
-              and status control
-            </li>
-          </ul>
-          <Button
-            variant="primary"
-            className="mt-6 bg-[var(--color-accent)] hover:bg-pink-600 transition duration-300"
-          >
-            View More
-          </Button>
-        </Card>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card
+                className="bg-gray-900 hover:shadow-2xl transition-shadow duration-300 h-full"
+                variant="classic"
+                size="3"
+              >
+                <Flex direction="column" gap="4">
+                  <Heading as="h3" size="5" color="violet">
+                    {project.title}
+                  </Heading>
 
-        {/* Game Development */}
-        <Card className="p-6 hover:scale-[1.03] hover:shadow-2xl transition-transform duration-300 rounded-2xl bg-white/10 border border-white/20">
-          <h3 className="text-2xl font-semibold text-[var(--color-primary)] mb-6">
-            Game Development
-          </h3>
-          <ul className="list-disc list-inside space-y-3 text-white/80">
-            <li>
-              <strong>Dot and Boxes:</strong> Classic strategy game built with
-              interactive UI
-            </li>
-            <li>
-              <strong>Dice Rolling Game:</strong> Python-based random number
-              game
-            </li>
-            <li>
-              <strong>Number Guessing Game:</strong> Terminal-based Python game
-              with logic handling
-            </li>
-          </ul>
-          <Button
-            variant="primary"
-            className="mt-6 bg-[var(--color-primary)] hover:bg-yellow-500 transition duration-300"
-          >
-            View More
-          </Button>
-        </Card>
+                  <Text size="3" className="text-gray-300">
+                    {project.description}
+                  </Text>
 
-        {/* Python Projects */}
-        <Card className="p-6 hover:scale-[1.03] hover:shadow-2xl transition-transform duration-300 rounded-2xl bg-white/10 border border-white/20">
-          <h3 className="text-2xl font-semibold text-[var(--color-accent)] mb-6">
-            Python Projects
-          </h3>
-          <ul className="list-disc list-inside space-y-3 text-white/80">
-            <li>
-              <strong>QR Code Generator:</strong> Generate scannable codes for
-              links/text
-            </li>
-            <li>
-              <strong>Password Manager:</strong> Securely store and retrieve
-              login credentials
-            </li>
-            <li>
-              <strong>Automated File Backup:</strong> Schedule-based backup
-              system
-            </li>
-            <li>
-              <strong>Budget Tracker App:</strong> Track expenses and visualise
-              spending
-            </li>
-            <li>
-              <strong>Language Learning App:</strong> Vocabulary practice with
-              spaced repetition
-            </li>
-          </ul>
-          <Button
-            variant="primary"
-            className="mt-6 bg-[var(--color-accent)] hover:bg-pink-600 transition duration-300"
-          >
-            View More
-          </Button>
-        </Card>
+                  <Flex wrap="wrap" gap="2" aria-label={`${project.title} technologies`}>
+                    {project.tech.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-violet-700 text-white text-xs px-2 py-1 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </Flex>
 
-        {/* AI & ML Projects */}
-        <Card className="p-6 hover:scale-[1.03] hover:shadow-2xl transition-transform duration-300 rounded-2xl bg-white/10 border border-white/20">
-          <h3 className="text-2xl font-semibold text-[var(--color-primary)] mb-6">
-            Artificial Intelligence & Machine Learning
-          </h3>
-          <ul className="list-disc list-inside space-y-3 text-white/80">
-            <li>
-              <strong>Chatbot with LLMs:</strong> Conversational agent using
-              large language models
-            </li>
-            <li>
-              <strong>AI Agent:</strong> Task-driven autonomous assistant
-            </li>
-            <li>
-              <strong>Resume Critiquer:</strong> AI-powered resume feedback
-              generator
-            </li>
-            <li>
-              <strong>Image Classifier:</strong> AI model for recognising image
-              categories
-            </li>
-            <li>
-              <strong>Smart Voice Assistant:</strong> Voice-activated ML system
-              with command execution
-            </li>
-          </ul>
-          <Button
-            variant="primary"
-            className="mt-6 bg-[var(--color-primary)] hover:bg-yellow-500 transition duration-300"
-          >
-            View More
-          </Button>
-        </Card>
+                  <Button
+                    asChild
+                    variant="solid"
+                    color="violet"
+                    size="2"
+                    className="mt-3 w-fit"
+                  >
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View project ${project.title}`}
+                    >
+                      View Project <ExternalLinkIcon className="ml-1" />
+                    </a>
+                  </Button>
+                </Flex>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
