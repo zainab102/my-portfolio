@@ -1,15 +1,16 @@
 export default function About() {
   return (
-    <section id="about" className="bg-[var(--color-section)] text-white py-20 px-6">
+    <section id="about" className="bg-about text-white py-24 px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-white">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
           About Me
         </h2>
+        <div className="section-divider mx-auto" />
 
         {/* Intro Paragraphs */}
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="space-y-6 text-lg">
+        <div className="grid md:grid-cols-2 gap-10 items-start mt-10">
+          <div className="space-y-7 text-lg leading-relaxed">
             <p>
               I’m <strong>Zainab</strong>, a tech-driven Business Administration student at Royal Holloway, University of London,
               pursuing a career at the intersection of computer science and digital strategy. With hands-on experience in full stack development,
@@ -23,9 +24,9 @@ export default function About() {
           </div>
 
           {/* Education Card Style */}
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 space-y-6 shadow-xl">
-            <h3 className="text-2xl font-semibold text-[var(--color-accent)]">Education</h3>
-            <ul className="space-y-5 text-sm leading-relaxed">
+          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 space-y-8 shadow-xl transition-transform duration-300 hover:scale-[1.03]">
+            <h3 className="text-2xl font-semibold text-[var(--color-accent)] mb-4">Education</h3>
+            <ul className="space-y-6 text-sm leading-relaxed">
               <li>
                 <strong className="text-white">Royal Holloway, University of London</strong> — Bachelor of Business Administration (2023 – Present)<br />
                 Strategic thinking, leadership, project management, and digital marketing. Projects emphasizing teamwork and global business awareness.
