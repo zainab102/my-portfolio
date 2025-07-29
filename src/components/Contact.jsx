@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Input, Textarea, Heading, Flex, Text } from '@radix-ui/themes';
+import { Button } from '@radix-ui/themes';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -22,6 +22,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Simulate sending message
     setStatus('Sending...');
 
     setTimeout(() => {
@@ -31,11 +32,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-[var(--color-contact-bg)] text-white py-20 px-6 md:px-12">
+    <section
+      id="contact"
+      className="bg-[var(--color-contact-bg)] text-white py-20 px-6 md:px-12"
+    >
       <div className="max-w-4xl mx-auto">
-        <Heading as="h2" size="8" className="text-center text-[var(--color-accent)] mb-12">
+        <h2 className="text-4xl font-bold text-center text-[var(--color-accent)] mb-12">
           Get in Touch
-        </Heading>
+        </h2>
 
         <form
           onSubmit={handleSubmit}
@@ -43,7 +47,7 @@ export default function Contact() {
           aria-label="Contact form"
           noValidate
         >
-          <Input
+          <input
             type="text"
             name="name"
             placeholder="Your Name"
@@ -52,9 +56,10 @@ export default function Contact() {
             required
             aria-required="true"
             aria-label="Your name"
+            className="bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300"
           />
 
-          <Input
+          <input
             type="email"
             name="email"
             placeholder="Your Email"
@@ -63,9 +68,10 @@ export default function Contact() {
             required
             aria-required="true"
             aria-label="Your email address"
+            className="bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300"
           />
 
-          <Textarea
+          <textarea
             name="message"
             placeholder="Your Message"
             rows={5}
@@ -74,18 +80,22 @@ export default function Contact() {
             required
             aria-required="true"
             aria-label="Your message"
+            className="bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300"
           />
 
-          <Flex justify="center">
+          <div className="flex justify-center">
             <Button type="submit" size="4" radius="large" color="violet">
               Send Message
             </Button>
-          </Flex>
+          </div>
 
           {status && (
-            <Text size="3" className="text-center text-[var(--color-primary)] mt-4" role="alert">
+            <p
+              className="text-center text-[var(--color-primary)] mt-4"
+              role="alert"
+            >
               {status}
-            </Text>
+            </p>
           )}
         </form>
       </div>
