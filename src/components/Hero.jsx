@@ -1,38 +1,52 @@
+'use client';
 import Image from 'next/image';
-// import { motion } from 'framer-motion'; // Uncomment if using animations
+import { motion } from 'framer-motion'; // Ensure framer-motion is installed
 
 export default function Hero() {
   return (
-    <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-7xl mx-auto">
-      {/* Text Content */}
-      <div className="text-center md:text-left space-y-6">
-        <h1 className="text-4xl sm:text-5xl font-bold text-[var(--color-primary)] leading-tight">
-          Hi, I'm Zainab 👋
-        </h1>
-        <p className="text-lg sm:text-xl text-[var(--color-secondary)] max-w-xl">
-          A passionate tech enthusiast blending creativity, code, and strategy. I build modern websites, apps, and AI-powered tools to make life smarter and more fun.
-        </p>
-        <a
-          href="#projects"
-          className="inline-block bg-[var(--color-accent)] text-white px-6 py-3 rounded-xl hover:bg-pink-600 transition duration-300 shadow-md"
+    <section id="hero" className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white py-24 px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
+        
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          className="flex-1 space-y-6 text-center md:text-left"
         >
-          View My Work 🚀
-        </a>
-      </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--color-primary)]">
+            Hi, I'm Zainab 👋
+          </h1>
+          <p className="text-lg sm:text-xl text-[var(--color-secondary)] max-w-xl mx-auto md:mx-0">
+            A passionate tech enthusiast blending creativity, code, and strategy. I build modern websites, apps, and AI-powered tools to make life smarter and more fun.
+          </p>
+          <a
+            href="#projects"
+            className="inline-block bg-[var(--color-accent)] text-white font-semibold px-6 py-3 rounded-xl hover:bg-pink-600 transition duration-300 shadow-lg"
+          >
+            View My Work 🚀
+          </a>
+        </motion.div>
 
-      {/* Profile Image */}
-      <div className="flex-shrink-0">
-        <div className="rounded-full overflow-hidden w-60 h-60 border-4 border-[var(--color-accent)] shadow-lg">
-          <Image
-            src="/profile.jpg"
-            alt="Zainab's profile"
-            width={240}
-            height={240}
-            className="object-cover w-full h-full"
-            priority
-          />
-        </div>
+        {/* Profile Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex-shrink-0"
+        >
+          <div className="rounded-full overflow-hidden w-60 h-60 md:w-72 md:h-72 border-4 border-[var(--color-accent)] shadow-xl">
+            <Image
+              src="/profile.jpg"
+              alt="Zainab's profile"
+              width={288}
+              height={288}
+              className="object-cover w-full h-full"
+              priority
+            />
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -2,70 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global font and body setup */
-body {
-  font-family: "Inter", sans-serif;
-  color: #fff; /* White text */
-  background-color: #1f1f2e; /* dark navy background */
-  scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
+/* Theme Variables */
+:root {
+  --color-bg: #0f172a; /* Deep navy */
+  --color-primary: #facc15; /* Vibrant yellow */
+  --color-secondary: #e2e8f0; /* Light gray */
+  --color-accent: #f472b6; /* Youthful pink */
+  --color-heading: #ffffff;
+  --color-text: #e5e5e5;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif;
 }
 
+/* Global Reset */
 html {
-  scroll-padding-top: 4rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans;
+  line-height: 1.75;
+  font-family: var(--font-sans);
+  font-size: 1rem;
 }
 
 /* Headings */
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+  font-family: var(--font-display);
   font-weight: 700;
-  color: #fff; /* White headings */
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 }
-
 h2 {
-  font-size: 2rem;
+  font-size: 1.875rem;
 }
-
 h3 {
   font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
 }
 
 /* Links */
 a {
-  transition: all 0.3s ease;
-  color: #6c63ff; /* violet-blue accent */
+  color: var(--color-accent);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
+
 a:hover {
-  opacity: 0.8;
+  color: #ec4899; /* Brighter pink on hover */
 }
 
-/* Section padding */
+/* Buttons */
+button,
+.btn {
+  @apply px-5 py-2 rounded-lg text-white bg-[var(--color-accent)] hover:bg-pink-600 transition duration-300 shadow-md;
+}
+
+/* Cards */
+.card {
+  @apply bg-white text-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300;
+}
+
+/* Sections */
 section {
-  padding: 6rem 1.5rem;
+  @apply py-16 px-6 md:px-12;
 }
 
-@media (min-width: 768px) {
-  section {
-    padding: 8rem 3rem;
-  }
+/* Utilities */
+.container {
+  @apply max-w-7xl mx-auto;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
+.text-gradient {
+  background: linear-gradient(to right, #facc15, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: #6c63ff;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-track {
-  background: #2a2a3a;
+
+/* Animations (Framer Motion or AOS) can be handled separately */
+
+/* Forms */
+input,
+textarea {
+  @apply bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)];
 }

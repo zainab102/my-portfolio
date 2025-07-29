@@ -1,161 +1,106 @@
-/* Color Variables */
+/* Typography & Font Families */
 :root {
-  --color-hero-bg: #1f1f2e;
-  --color-about-bg: #2a2a3a;
-  --color-projects-bg: #3a3a4a;
-  --color-skills-bg: #2a2a3a;
-  --color-contact-bg: #3a3a4a;
-  --color-primary: #6c63ff;
-  --color-accent: #ff6584;
-  --color-text: #fff; /* white text */
-  --color-muted: #bbbbbb;
-  --color-footer-bg: #111827;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif;
 }
 
-/* Background Themes */
-.bg-hero {
-  background-color: var(--color-hero-bg);
-  color: var(--color-text);
-}
-
-.bg-about {
-  background-color: var(--color-about-bg);
-  color: var(--color-text);
-}
-
-.bg-projects {
-  background-color: var(--color-projects-bg);
-  color: var(--color-text);
-}
-
-.bg-skills {
-  background-color: var(--color-skills-bg);
-  color: var(--color-text);
-}
-
-.bg-contact {
-  background-color: var(--color-contact-bg);
-  color: var(--color-text);
-}
-
-.bg-footer {
-  background-color: var(--color-footer-bg);
-  color: var(--color-text);
-}
-
-/* Card Styling */
-.card {
-  background: #252536;
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.6);
-  padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: var(--color-text);
-}
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
-}
-
-/* Gradient Card */
-.card-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
-  color: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 10px 20px rgba(108, 99, 255, 0.6);
-  transition: transform 0.3s ease;
-}
-.card-gradient:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 30px rgba(255, 101, 132, 0.8);
+/* Color Palette */
+:root {
+  --color-bg: #0f172a; /* dark navy */
+  --color-surface: #1e293b; /* card background */
+  --color-primary: #facc15; /* yellow */
+  --color-secondary: #94a3b8; /* cool gray */
+  --color-accent: #f472b6; /* pink */
+  --color-muted: #475569; /* muted gray-blue */
+  --color-border: #334155; /* border color */
+  --color-text: #e5e5e5;
+  --color-heading: #ffffff;
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(108, 99, 255, 0.7);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-.btn-primary:hover {
-  background-color: #574fd6;
-  box-shadow: 0 6px 12px rgba(87, 79, 214, 0.9);
+  @apply bg-[var(--color-primary)] text-black px-5 py-2 rounded-xl shadow-md hover:bg-yellow-400 transition duration-300 font-medium;
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--color-primary);
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  border: 2px solid var(--color-primary);
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-.btn-secondary:hover {
-  background-color: var(--color-primary);
-  color: white;
+  @apply bg-[var(--color-accent)] text-white px-5 py-2 rounded-xl shadow-md hover:bg-pink-600 transition duration-300 font-medium;
 }
 
-/* Section Divider */
-.section-divider {
-  height: 4px;
-  width: 60px;
-  margin: 1.5rem auto;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+.btn-outline {
+  @apply border border-[var(--color-primary)] text-[var(--color-primary)] px-5 py-2 rounded-xl hover:bg-[var(--color-primary)] hover:text-black transition duration-300 font-medium;
 }
 
-/* Background Patterns */
-.bg-stripes {
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(108, 99, 255, 0.15),
-    rgba(108, 99, 255, 0.15) 10px,
-    rgba(255, 101, 132, 0.15) 10px,
-    rgba(255, 101, 132, 0.15) 20px
-  );
+/* Cards */
+.card-primary {
+  @apply bg-[var(--color-surface)] text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
 }
 
-/* Text Highlight Gradient */
-.text-highlight {
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+.card-glass {
+  @apply backdrop-blur-md bg-white/10 border border-[var(--color-border)] p-6 rounded-xl text-white shadow-lg;
+}
+
+/* Text Utilities */
+.text-muted {
+  @apply text-[var(--color-muted)];
+}
+
+.text-accent {
+  @apply text-[var(--color-accent)];
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #facc15, #f472b6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
 }
 
-/* Glow Effects */
-.glow-primary {
-  box-shadow: 0 0 12px 3px rgba(108, 99, 255, 0.7);
+/* Badges */
+.badge {
+  @apply inline-block text-xs px-3 py-1 rounded-full font-semibold;
 }
 
-.glow-accent {
-  box-shadow: 0 0 15px 5px rgba(255, 101, 132, 0.8);
+.badge-primary {
+  @apply bg-[var(--color-primary)] text-black;
 }
 
-/* Fade in Animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.badge-accent {
+  @apply bg-[var(--color-accent)] text-white;
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease forwards;
+/* Layout Elements */
+.box {
+  @apply p-6 rounded-2xl shadow-md bg-[var(--color-surface)] border border-[var(--color-border)];
+}
+
+.section-header {
+  @apply text-4xl font-bold text-center text-white mb-10;
+}
+
+.section-subheader {
+  @apply text-xl text-[var(--color-secondary)] text-center mb-6;
+}
+
+/* Form Elements */
+.input-field {
+  @apply bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300;
+}
+
+.label {
+  @apply text-sm font-medium text-white mb-1 block;
+}
+
+/* Shadows & Transitions */
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+.transition-soft {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Responsive Grid for Project / Cards Section */
+.grid-responsive {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
 }
