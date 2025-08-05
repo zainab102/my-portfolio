@@ -1,5 +1,7 @@
 'use client';
 
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
 export default function Footer() {
   return (
     <footer className="bg-[var(--color-contact-bg)] text-white py-10 px-6 mt-20">
@@ -7,53 +9,50 @@ export default function Footer() {
         {/* Branding */}
         <div className="text-center md:text-left">
           <h2 className="text-2xl font-bold text-[var(--color-accent)]">Zainab.dev</h2>
-          <p className="text-sm text-gray-300">© {new Date().getFullYear()} All rights reserved.</p>
+          <p className="text-sm text-gray-300">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
         </div>
 
         {/* Navigation */}
         <ul className="flex flex-wrap justify-center gap-6 text-sm font-medium">
-          <li>
-            <a href="#about" className="hover:text-[var(--color-accent)] transition">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#projects" className="hover:text-[var(--color-accent)] transition">
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="#skills" className="hover:text-[var(--color-accent)] transition">
-              Skills
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-[var(--color-accent)] transition">
-              Contact
-            </a>
-          </li>
+          <li><a href="#about" className="hover:text-[var(--color-accent)] transition">About</a></li>
+          <li><a href="#projects" className="hover:text-[var(--color-accent)] transition">Projects</a></li>
+          <li><a href="#skills" className="hover:text-[var(--color-accent)] transition">Skills</a></li>
+          <li><a href="#contact" className="hover:text-[var(--color-accent)] transition">Contact</a></li>
         </ul>
 
         {/* Social Icons */}
-        <div className="flex space-x-5">
+        <div className="flex space-x-6">
           <a
             href="https://github.com/zainab102"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
+            className="flex items-center space-x-2 hover:text-[var(--color-accent)] transition transform hover:scale-110"
           >
-            <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6 hover:opacity-80" />
+            <FaGithub size={28} />
+            <span className="hidden sm:inline">GitHub</span>
           </a>
+
           <a
-            href="https://www.linkedin.com/in/zainab-22243b366/"
+            href="https://linkedin.com/in/zainab-22243b366"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
+            className="flex items-center space-x-2 hover:text-[var(--color-accent)] transition transform hover:scale-110"
           >
-            <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6 hover:opacity-80" />
+            <FaLinkedin size={28} />
+            <span className="hidden sm:inline">LinkedIn</span>
           </a>
-          <a href="mailto:zainab@example.com" aria-label="Email">
-            <img src="/icons/email.svg" alt="Email" className="w-6 h-6 hover:opacity-80" />
+
+          <a
+            href="mailto:zainab@example.com"
+            aria-label="Email"
+            className="flex items-center space-x-2 hover:text-[var(--color-accent)] transition transform hover:scale-110"
+          >
+            <FaEnvelope size={28} />
+            <span className="hidden sm:inline">Email</span>
           </a>
         </div>
       </div>
