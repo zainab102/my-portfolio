@@ -45,7 +45,12 @@ export default function Skills() {
               {technicalSkills.map((skill, idx) => (
                 <li key={idx}>
                   <span
-                    className="badge-solid cursor-default text-sm px-4 py-2 rounded-full"
+                    className="
+                      badge-primary cursor-default text-sm px-4 py-2 rounded-full 
+                      bg-[var(--color-primary)] bg-opacity-60 text-black 
+                      transition-colors duration-300 ease-in-out
+                      hover:bg-[var(--color-accent)] hover:bg-opacity-90 hover:text-white
+                    "
                     aria-label={`Technical skill: ${skill}`}
                   >
                     {skill}
@@ -64,7 +69,12 @@ export default function Skills() {
               {softSkills.map((skill, idx) => (
                 <li key={idx}>
                   <span
-                    className="badge-outline cursor-default text-sm px-4 py-2 rounded-full"
+                    className="
+                      badge-accent cursor-default text-sm px-4 py-2 rounded-full 
+                      bg-[var(--color-accent)] bg-opacity-70 text-white
+                      transition-colors duration-300 ease-in-out
+                      hover:bg-[var(--color-primary)] hover:bg-opacity-90 hover:text-black
+                    "
                     aria-label={`Soft skill: ${skill}`}
                   >
                     {skill}

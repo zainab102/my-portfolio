@@ -5,9 +5,18 @@ import { motion } from 'framer-motion';
 import { Button, Heading, Text, Flex } from '@radix-ui/themes';
 
 export default function Hero() {
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+      projectsSection.focus({ preventScroll: true });
+    }
+  };
+
   return (
     <section
       id="hero"
+      aria-label="Introduction"
       className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white py-24 px-6 md:px-12 lg:px-20"
     >
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
@@ -18,7 +27,7 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="flex-1 space-y-6 text-center md:text-left"
         >
-          <Heading as="h1" size="8" color="accent">
+          <Heading as="h1" size="8" color="accent" tabIndex={-1}>
             Hi, I'm Zainab 👋
           </Heading>
 
@@ -33,9 +42,7 @@ export default function Hero() {
               radius="large"
               variant="solid"
               highContrast
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={scrollToProjects}
               aria-label="View my work projects"
             >
               View My Work 🚀
@@ -53,7 +60,7 @@ export default function Hero() {
           <div className="rounded-full overflow-hidden w-60 h-60 md:w-72 md:h-72 border-4 border-[var(--color-accent)] shadow-xl">
             <Image
               src="/profile.jpg"
-              alt="Zainab's profile"
+              alt="Profile picture of Zainab Tariq"
               width={288}
               height={288}
               className="object-cover w-full h-full"

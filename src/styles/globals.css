@@ -16,22 +16,21 @@
   --color-accent: #f472b6; /* Youthful pink */
   --color-heading: #ffffff;
   --color-text: #e5e5e5;
+
   --font-sans: "Inter", sans-serif;
   --font-display: "Poppins", sans-serif;
 }
 
-/* Global Reset */
+/* Global Reset & Base Styles */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans;
+  @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans m-0 p-0;
   line-height: 1.75;
   font-family: var(--font-sans);
   font-size: 1rem;
-  margin: 0;
-  padding: 0;
 }
 
 /* Headings */
@@ -50,15 +49,12 @@ h6 {
 h1 {
   font-size: 2.25rem;
 }
-
 h2 {
   font-size: 1.875rem;
 }
-
 h3 {
   font-size: 1.5rem;
 }
-
 h4 {
   font-size: 1.25rem;
 }
@@ -71,7 +67,7 @@ a {
 }
 
 a:hover {
-  color: #ec4899; /* Brighter pink on hover */
+  color: #ec4899; /* Brighter pink */
 }
 
 /* Buttons */
@@ -96,12 +92,12 @@ button:hover,
   @apply shadow-2xl scale-105;
 }
 
-/* Sections with distinct backgrounds */
+/* Sections */
 section {
   @apply py-24 px-6 md:px-12;
 }
 
-/* Specific backgrounds for main sections */
+/* Section Backgrounds */
 .bg-hero {
   background-color: var(--color-hero-bg);
   color: var(--color-text);
@@ -132,7 +128,7 @@ section {
   @apply max-w-7xl mx-auto;
 }
 
-/* Section Divider (underline for section headings) */
+/* Section Divider */
 .section-divider {
   height: 4px;
   width: 60px;
@@ -145,7 +141,7 @@ section {
   );
 }
 
-/* Text gradient for highlights */
+/* Text Gradient */
 .text-gradient {
   background: linear-gradient(
     to right,
@@ -159,10 +155,10 @@ section {
 /* Form Inputs */
 input,
 textarea {
-  @apply bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)];
+  @apply bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300;
 }
 
-/* Scrollbar styling */
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -176,7 +172,7 @@ textarea {
   background: #1a1a2e;
 }
 
-/* Skill Badge/Chip styling */
+/* Skill Badge/Chip */
 .badge {
   @apply inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[var(--color-primary)] bg-opacity-30 text-[var(--color-primary)] cursor-default transition duration-300;
   user-select: none;
@@ -189,7 +185,7 @@ textarea {
   transition-property: background-color, transform, box-shadow;
 }
 
-/* Utility spacing for grids/gaps (if needed) */
+/* Utility */
 .grid-gap-6 {
   gap: 1.5rem;
 }

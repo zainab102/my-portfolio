@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
       </Head>
 
       <body className="min-h-screen flex flex-col font-sans text-[var(--color-text)]">
+        {/* Header/Navbar */}
         <header className="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-md shadow-md z-50">
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             <a
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
               Zainab
             </a>
 
+            {/* Desktop Nav */}
             <nav className="hidden md:flex space-x-8 font-medium text-gray-700">
               <a href="#about" className="hover:text-purple-600 transition">
                 About
@@ -43,8 +45,10 @@ export default function RootLayout({ children }) {
           </div>
         </header>
 
+        {/* Main content */}
         <main className="flex-grow pt-24 container mx-auto px-6">{children}</main>
 
+        {/* Footer */}
         <footer className="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-6 mt-16 shadow-inner">
           <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm opacity-90 select-none">

@@ -22,9 +22,11 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate sending message
+    // Simple front-end validation could be added here if needed
+
     setStatus('Sending...');
 
+    // Simulate API call delay
     setTimeout(() => {
       setStatus('Thank you for reaching out! I will get back to you soon.');
       setFormData({ name: '', email: '', message: '' });
@@ -80,11 +82,17 @@ export default function Contact() {
             required
             aria-required="true"
             aria-label="Your message"
-            className="bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300"
+            className="bg-gray-100 text-gray-900 p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition duration-300 resize-y"
           />
 
           <div className="flex justify-center">
-            <Button type="submit" size="4" radius="large" color="violet">
+            <Button
+              type="submit"
+              size="4"
+              radius="large"
+              color="violet"
+              className="w-full md:w-auto px-6 py-3"
+            >
               Send Message
             </Button>
           </div>

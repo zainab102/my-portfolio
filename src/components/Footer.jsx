@@ -36,11 +36,16 @@ export default function Footer() {
 
         {/* Social Icons */}
         <div className="flex space-x-5">
-          <a href="https://github.com/zainabtariq" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a
+            href="https://github.com/zainab102"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
             <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6 hover:opacity-80" />
           </a>
           <a
-            href="https://linkedin.com/in/zainabtariq"
+            href="https://www.linkedin.com/in/zainab-22243b366/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
