@@ -1,5 +1,5 @@
 // /src/app/api/blogs/route.js
-import clientPromise from "../../lib/mongodb";
+import client from "@lib/mongodb";
 
 export async function GET(req) {
   try {
