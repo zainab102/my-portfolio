@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // for App Router
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const NAV_ITEMS = [
@@ -16,15 +18,16 @@ export default function Navbar() {
   const [active, setActive] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 10);
 
-      // Update active section based on scroll position
       const scrollPos = window.scrollY + 100;
       let current = 'hero';
       for (const item of NAV_ITEMS) {
+        if (item.id === 'blogs') continue; // blogs is a separate page
         const section = document.getElementById(item.id);
         if (section && section.offsetTop <= scrollPos) {
           current = item.id;
@@ -37,9 +40,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // If user is on /blogs page, highlight Blogs
+  useEffect(() => {
+    if (pathname === '/blogs') {
+      setActive('blogs');
+    }
+  }, [pathname]);
+
   function handleClick(e, id) {
     e.preventDefault();
-    setMenuOpen(false); // close menu on link click (mobile)
+    setMenuOpen(false);
 
     if (id === 'blogs') {
       window.location.href = '/blogs';
@@ -54,6 +64,41 @@ export default function Navbar() {
       window.location.href = `/#${id}`;
     }
   }
+
+  const renderLink = (id, label) => {
+    const isActive = active === id;
+    return id === 'blogs' ? (
+      <Link
+        href="/blogs"
+        className={`px-3 py-2 rounded-md transition-colors duration-200 ${
+          isActive
+            ? 'text-[var(--color-primary)] font-semibold'
+            : 'text-[var(--color-secondary)] hover:text-[var(--color-primary)]'
+        }`}
+      >
+        {label}
+      </Link>
+    ) : (
+      <a
+        href={`#${id}`}
+        onClick={(e) => handleClick(e, id)}
+        aria-current={isActive ? 'page' : undefined}
+        className={`relative px-3 py-2 rounded-md transition-colors duration-200 ${
+          isActive
+            ? 'text-[var(--color-primary)] font-semibold'
+            : 'text-[var(--color-secondary)] hover:text-[var(--color-primary)]'
+        }`}
+      >
+        {label}
+        {isActive && id !== 'blogs' && (
+          <span
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)] rounded"
+            aria-hidden="true"
+          />
+        )}
+      </a>
+    );
+  };
 
   return (
     <nav
@@ -72,26 +117,9 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex space-x-8 font-medium text-[var(--color-secondary)]">
+        <ul className="hidden md:flex space-x-8 font-medium">
           {NAV_ITEMS.map(({ id, label }) => (
-            <li key={id}>
-              <a
-                href={id === 'blogs' ? '/blogs' : `#${id}`}
-                onClick={(e) => handleClick(e, id)}
-                aria-current={active === id ? 'page' : undefined}
-                className={`relative px-3 py-2 rounded-md hover:text-[var(--color-primary)] transition-colors duration-200 ${
-                  active === id ? 'text-[var(--color-primary)] font-semibold' : ''
-                }`}
-              >
-                {label}
-                {active === id && (
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)] rounded"
-                    aria-hidden="true"
-                  />
-                )}
-              </a>
-            </li>
+            <li key={id}>{renderLink(id, label)}</li>
           ))}
         </ul>
 
@@ -109,20 +137,9 @@ export default function Navbar() {
       {/* Mobile Nav Menu */}
       {menuOpen && (
         <div className="md:hidden bg-[var(--color-bg)] px-6 py-6 shadow-lg">
-          <ul className="flex flex-col space-y-4 font-medium text-[var(--color-secondary)]">
+          <ul className="flex flex-col space-y-4 font-medium">
             {NAV_ITEMS.map(({ id, label }) => (
-              <li key={id}>
-                <a
-                  href={id === 'blogs' ? '/blogs' : `#${id}`}
-                  onClick={(e) => handleClick(e, id)}
-                  aria-current={active === id ? 'page' : undefined}
-                  className={`block px-3 py-2 rounded-md hover:text-[var(--color-primary)] transition-colors duration-200 ${
-                    active === id ? 'text-[var(--color-primary)] font-semibold' : ''
-                  }`}
-                >
-                  {label}
-                </a>
-              </li>
+              <li key={id}>{renderLink(id, label)}</li>
             ))}
           </ul>
         </div>

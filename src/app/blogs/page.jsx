@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const PAGE_SIZE = 5; // blogs per page
 
-export default function Blogs() {
+export default function BlogsPage() {
   const [blogs, setBlogs] = useState([]);
   const [page, setPage] = useState(1);
   const [totalBlogs, setTotalBlogs] = useState(0);
@@ -19,7 +20,7 @@ export default function Blogs() {
         setBlogs(data.blogs);
         setTotalBlogs(data.total);
       } catch (err) {
-        console.error('Failed to load blogs:', err);
+        console.error("Failed to load blogs:", err);
       } finally {
         setLoading(false);
       }
@@ -35,13 +36,16 @@ export default function Blogs() {
         <h1 className="text-4xl font-bold mb-8 text-[var(--color-primary)]">Blogs</h1>
 
         {loading && <p>Loading blogs...</p>}
-
-        {!loading && blogs.length === 0 && <p>No blogs found.</p>}
+        {!loading && Array.isArray(blogs) && blogs.length === 0 && <p>No blogs found.</p>}
 
         <ul className="space-y-8">
           {blogs.map((blog) => (
             <li key={blog._id} className="border-b border-gray-600 pb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-[var(--color-accent)]">{blog.title}</h2>
+              <Link href={`/blogs/${blog.slug}`}>
+                <h2 className="text-2xl font-semibold mb-2 text-[var(--color-accent)] hover:underline">
+                  {blog.title}
+                </h2>
+              </Link>
               <p className="text-gray-300 mb-2">{blog.summary}</p>
               <small className="text-gray-500">
                 Published on {new Date(blog.createdAt).toLocaleDateString()}
