@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 
@@ -15,15 +15,17 @@ export default function BlogsAdmin() {
   });
   const [message, setMessage] = useState("");
 
-  // Fetch blogs
-  async function fetchBlogs() {
+  // Fetch blogs with pagination
+  async function fetchBlogs(page = 1, limit = 100) {
     setLoading(true);
     try {
-      const res = await fetch("/api/blogs?page=1&limit=100");
+      const res = await fetch(`/api/blogs?page=${page}&limit=${limit}`);
+      if (!res.ok) throw new Error("Failed to fetch blogs");
       const data = await res.json();
       setBlogs(data.blogs || []);
     } catch (err) {
       console.error(err);
+      setMessage(err.message);
     } finally {
       setLoading(false);
     }
@@ -38,21 +40,26 @@ export default function BlogsAdmin() {
     e.preventDefault();
     setMessage("Submitting...");
 
-    const method = form.id ? "PUT" : "POST";
-    const url = form.id ? "/api/blogs/edit" : "/api/blogs/add";
+    try {
+      const method = form.id ? "PUT" : "POST";
+      const url = form.id ? "/api/blogs/edit" : "/api/blogs/add";
 
-    const res = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
-    setMessage(data.message || data.error || "Unknown error");
+      const data = await res.json();
+      setMessage(data.message || data.error || "Unknown error");
 
-    if (res.ok) {
-      setForm({ title: "", slug: "", summary: "", content: "", image: "", id: "" });
-      fetchBlogs();
+      if (res.ok) {
+        setForm({ title: "", slug: "", summary: "", content: "", image: "", id: "" });
+        fetchBlogs();
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("Server error");
     }
   }
 
@@ -60,15 +67,19 @@ export default function BlogsAdmin() {
   async function handleDelete(id) {
     if (!confirm("Are you sure you want to delete this blog?")) return;
 
-    const res = await fetch("/api/blogs/delete", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-
-    const data = await res.json();
-    setMessage(data.message || data.error);
-    fetchBlogs();
+    try {
+      const res = await fetch("/api/blogs/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      const data = await res.json();
+      setMessage(data.message || data.error);
+      fetchBlogs();
+    } catch (err) {
+      console.error(err);
+      setMessage("Failed to delete");
+    }
   }
 
   // Fill form for editing

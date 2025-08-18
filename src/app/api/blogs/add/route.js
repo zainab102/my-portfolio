@@ -1,49 +1,30 @@
-// /src/app/api/blogs/add/route.js
-import clientPromise from "@lib/mongodb";
-import formidable from "formidable";
-
-// Disable default body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import connectDB from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export async function POST(req) {
-  const form = new formidable.IncomingForm();
-  
-  return new Promise((resolve, reject) => {
-    form.parse(req, async (err, fields, files) => {
-      if (err) return resolve(new Response(JSON.stringify({ error: err.message }), { status: 500 }));
+  try {
+    await connectDB();
+    const { title, slug, summary, content, image } = await req.json();
 
-      try {
-        const { title, slug, summary, content } = fields;
+    if (!title || !slug || !content) {
+      return new Response(
+        JSON.stringify({ error: "Title, slug, and content are required" }),
+        { status: 400 }
+      );
+    }
 
-        // Example: convert uploaded file to base64 string
-        let imageUrl = "";
-        if (files.image) {
-          const file = files.image[0]; // formidable returns array
-          const buffer = await fs.promises.readFile(file.filepath);
-          imageUrl = `data:${file.mimetype};base64,${buffer.toString("base64")}`;
-        }
+    const existing = await Blog.findOne({ slug });
+    if (existing) {
+      return new Response(JSON.stringify({ error: "Slug already exists" }), { status: 400 });
+    }
 
-        const client = await clientPromise;
-        const db = client.db("myPortfolio");
-        const blogsCollection = db.collection("blogs");
+    const blog = await Blog.create({ title, slug, summary, content, image });
 
-        const result = await blogsCollection.insertOne({
-          title,
-          slug,
-          summary,
-          content,
-          image: imageUrl,
-          createdAt: new Date(),
-        });
-
-        resolve(new Response(JSON.stringify({ message: "Blog added!", blogId: result.insertedId }), { status: 200 }));
-      } catch (error) {
-        resolve(new Response(JSON.stringify({ error: error.message }), { status: 500 }));
-      }
+    return new Response(JSON.stringify({ message: "Blog added successfully", blog }), {
+      status: 201,
     });
-  });
+  } catch (err) {
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+  }
 }

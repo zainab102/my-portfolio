@@ -1,30 +1,36 @@
-import clientPromise from "@lib/mongodb";
+import connectDB from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export async function PUT(req) {
   try {
-    const body = await req.json();
-    const { id, title, slug, summary, content } = body;
+    await connectDB();
+    const { id, title, slug, summary, content, image } = await req.json();
 
     if (!id || !title || !slug || !content) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+      return new Response(
+        JSON.stringify({ error: "ID, title, slug, and content are required" }),
+        { status: 400 }
+      );
     }
 
-    const client = await clientPromise;
-    const db = client.db("myPortfolio");
-    const blogsCollection = db.collection("blogs");
-
-    const result = await blogsCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { title, slug, summary, content } }
-    );
-
-    if (result.matchedCount === 0) {
+    const blog = await Blog.findById(id);
+    if (!blog) {
       return new Response(JSON.stringify({ error: "Blog not found" }), { status: 404 });
     }
 
-    return new Response(JSON.stringify({ message: "Blog updated successfully" }), { status: 200 });
-  } catch (error) {
-    console.error("Error updating blog:", error);
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    blog.title = title;
+    blog.slug = slug;
+    blog.summary = summary;
+    blog.content = content;
+    blog.image = image;
+
+    await blog.save();
+
+    return new Response(JSON.stringify({ message: "Blog updated successfully", blog }), {
+      status: 200,
+    });
+  } catch (err) {
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
 }

@@ -1,46 +1,43 @@
-import clientPromise from "@lib/mongodb";
+'use client';
 
-export async function generateStaticParams() {
-  const client = await clientPromise;
-  const db = client.db("myPortfolio");
-  const blogs = await db
-    .collection("blogs")
-    .find({}, { projection: { slug: 1 } })
-    .toArray();
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Comments from "@/components/Comments";
 
-  return blogs.map((blog) => ({ slug: blog.slug }));
-}
+export default function BlogPage() {
+  const { slug } = useParams();
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-export default async function BlogPost({ params }) {
-  const { slug } = params;
-
-  const client = await clientPromise;
-  const db = client.db("myPortfolio");
-
-  const blog = await db.collection("blogs").findOne({ slug });
-
-  if (!blog) {
-    return <p>Blog not found</p>;
+  async function fetchBlog() {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/blogs/${slug}`);
+      const data = await res.json();
+      setBlog(data.blog || null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
+  useEffect(() => {
+    if (slug) fetchBlog();
+  }, [slug]);
+
+  if (loading) return <p>Loading...</p>;
+  if (!blog) return <p>Blog not found.</p>;
+
   return (
-    <main className="container mx-auto p-6">
+    <div className="max-w-4xl mx-auto py-12 px-6">
       <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
-      <p className="text-gray-500 mb-4">{new Date(blog.createdAt).toLocaleDateString()}</p>
+      <p className="text-gray-400 mb-6">{blog.summary}</p>
+      {blog.image && <img src={blog.image} alt={blog.title} className="mb-6 rounded shadow-md" />}
+      <div className="prose max-w-none mb-10" dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-      {blog.image && (
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="mb-6 rounded shadow-md max-w-full"
-        />
-      )}
-
-      <article className="prose max-w-none">
-        {blog.content.split("\n").map((line, idx) => (
-          <p key={idx}>{line}</p>
-        ))}
-      </article>
-    </main>
+      {/* Comments Section */}
+      <Comments blogId={blog._id} />
+    </div>
   );
 }

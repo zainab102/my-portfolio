@@ -1,28 +1,25 @@
-import clientPromise from "@lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectDB from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export async function DELETE(req) {
   try {
-    const body = await req.json();
-    const { id } = body;
+    await connectDB();
+    const { id } = await req.json();
 
     if (!id) {
-      return new Response(JSON.stringify({ error: "Blog ID required" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "Blog ID is required" }), { status: 400 });
     }
 
-    const client = await clientPromise;
-    const db = client.db("myPortfolio");
-    const blogsCollection = db.collection("blogs");
-
-    const result = await blogsCollection.deleteOne({ _id: new ObjectId(id) });
-
-    if (result.deletedCount === 0) {
+    const blog = await Blog.findById(id);
+    if (!blog) {
       return new Response(JSON.stringify({ error: "Blog not found" }), { status: 404 });
     }
 
+    await blog.remove();
+
     return new Response(JSON.stringify({ message: "Blog deleted successfully" }), { status: 200 });
-  } catch (error) {
-    console.error("Error deleting blog:", error);
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  } catch (err) {
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
 }
