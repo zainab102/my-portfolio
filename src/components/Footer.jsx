@@ -1,3 +1,4 @@
+// src/components/Footer.jsx
 'use client';
 
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
@@ -13,14 +14,6 @@ export default function Footer() {
             © {new Date().getFullYear()} All rights reserved.
           </p>
         </div>
-
-        {/* Navigation */}
-        <ul className="flex flex-wrap justify-center gap-6 text-sm font-medium">
-          <li><a href="#about" className="hover:text-[var(--color-accent)] transition">About</a></li>
-          <li><a href="#projects" className="hover:text-[var(--color-accent)] transition">Projects</a></li>
-          <li><a href="#skills" className="hover:text-[var(--color-accent)] transition">Skills</a></li>
-          <li><a href="#contact" className="hover:text-[var(--color-accent)] transition">Contact</a></li>
-        </ul>
 
         {/* Social Icons */}
         <div className="flex space-x-6">
