@@ -1,5 +1,4 @@
-// /src/app/api/blogs/route.js
-import client from "@lib/mongodb";
+import clientPromise from "@lib/mongodb";
 
 export async function GET(req) {
   try {
@@ -9,7 +8,7 @@ export async function GET(req) {
     const skip = (page - 1) * limit;
 
     const client = await clientPromise;
-    const db = client.db("my-portfolio-cluster");
+    const db = client.db("myPortfolio"); // your DB name
     const blogsCollection = db.collection("blogs");
 
     const total = await blogsCollection.countDocuments();
@@ -21,10 +20,19 @@ export async function GET(req) {
       .toArray();
 
     return new Response(
-      JSON.stringify({ blogs, total, page, totalPages: Math.ceil(total / limit) }),
+      JSON.stringify({
+        blogs,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      }),
       { status: 200 }
     );
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    console.error("Failed to fetch blogs:", error);
+    return new Response(
+      JSON.stringify({ blogs: [], total: 0, error: error.message }),
+      { status: 500 }
+    );
   }
 }

@@ -22,7 +22,6 @@ export default function BlogsPage() {
 
         const data = await res.json();
 
-        // Ensure blogs is always an array
         setBlogs(Array.isArray(data.blogs) ? data.blogs : []);
         setTotalBlogs(typeof data.total === "number" ? data.total : 0);
       } catch (err) {
@@ -53,19 +52,25 @@ export default function BlogsPage() {
 
         <ul className="space-y-8">
           {(blogs || []).map((blog) => (
-            <li key={blog._id} className="border-b border-gray-600 pb-6">
-              <Link href={`/blogs/${blog.slug}`}>
-                <h2 className="text-2xl font-semibold mb-2 text-[var(--color-accent)] hover:underline">
-                  {blog.title}
-                </h2>
-              </Link>
-              <p className="text-gray-300 mb-2">{blog.summary}</p>
-              <small className="text-gray-500">
-                Published on{" "}
-                {blog.createdAt
-                  ? new Date(blog.createdAt).toLocaleDateString()
-                  : ""}
-              </small>
+            <li key={blog._id} className="border-b border-gray-600 pb-6 flex gap-4">
+              {blog.image && (
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="w-32 h-20 object-cover rounded"
+                />
+              )}
+              <div>
+                <Link href={`/blogs/${blog.slug}`}>
+                  <h2 className="text-2xl font-semibold mb-2 text-[var(--color-accent)] hover:underline">
+                    {blog.title}
+                  </h2>
+                </Link>
+                <p className="text-gray-300 mb-2">{blog.summary}</p>
+                <small className="text-gray-500">
+                  Published on {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : ""}
+                </small>
+              </div>
             </li>
           ))}
         </ul>
