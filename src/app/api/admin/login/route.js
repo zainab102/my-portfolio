@@ -1,34 +1,27 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const ADMIN_USER = {
-  email: process.env.ADMIN_EMAIL,
-  password: process.env.ADMIN_PASSWORD, // plain for dev, hash for prod
-};
-
 export async function POST(req) {
-  try {
-    const body = await req.json();
-    const { email, password } = body;
+  const { email, password } = await req.json();
 
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password required" }, { status: 400 });
-    }
+  // Example hardcoded admin credentials
+  const ADMIN_EMAIL = "admin@example.com";
+  const ADMIN_PASSWORD = "1234";
 
-    // Check credentials
-    const isValid = email === ADMIN_USER.email && password === ADMIN_USER.password;
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    const token = jwt.sign(
+      { email },
+      process.env.JWT_SECRET || "fallback_secret",
+      { expiresIn: "1h" }
+    );
 
-    if (!isValid) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
-
-    // Generate JWT
-    const token = jwt.sign({ email: ADMIN_USER.email }, process.env.JWT_SECRET, { expiresIn: "1d" });
-
-    return NextResponse.json({ message: "Login successful", token });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    return new Response(JSON.stringify({ token }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   }
+
+  return new Response(JSON.stringify({ message: "Invalid credentials" }), {
+    status: 401,
+    headers: { "Content-Type": "application/json" },
+  });
 }
