@@ -1,36 +1,30 @@
-import connectDB from "@/lib/mongodb";
-import Blog from "@/models/Blog";
+import { updateBlog } from "@/models/Blog";
+import { ObjectId } from "mongodb";
 
 export async function PUT(req) {
   try {
-    await connectDB();
-    const { id, title, slug, summary, content, image } = await req.json();
-
-    if (!id || !title || !slug || !content) {
-      return new Response(
-        JSON.stringify({ error: "ID, title, slug, and content are required" }),
-        { status: 400 }
-      );
+    const data = await req.json();
+    if (!data.id) {
+      return new Response(JSON.stringify({ error: "Blog ID is required" }), {
+        status: 400,
+      });
     }
 
-    const blog = await Blog.findById(id);
-    if (!blog) {
-      return new Response(JSON.stringify({ error: "Blog not found" }), { status: 404 });
-    }
+    const updatedData = {
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || "",
+      content: data.content,
+      image: data.image || "",
+      updatedAt: new Date(),
+    };
 
-    blog.title = title;
-    blog.slug = slug;
-    blog.summary = summary;
-    blog.content = content;
-    blog.image = image;
+    await updateBlog(data.id, updatedData);
 
-    await blog.save();
-
-    return new Response(JSON.stringify({ message: "Blog updated successfully", blog }), {
+    return new Response(JSON.stringify({ message: "Blog updated successfully" }), {
       status: 200,
     });
   } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 }
