@@ -1,20 +1,18 @@
-import dbConnect from "@/lib/dbConnect";
+import connectDB from "lib/mongodb";
 import Comment from "@/models/Comment";
+import Blog from "@/models/blog"; // lowercase file name
+
+
+connectDB();
 
 export async function POST(req) {
   try {
-    await dbConnect();
     const body = await req.json();
-    const { blogId, name, email, content } = body;
-
-    if (!blogId || !name || !email || !content) {
-      return new Response(JSON.stringify({ error: "All fields are required" }), { status: 400 });
-    }
-
-    const newComment = await Comment.create({ blogId, name, email, content });
-    return new Response(JSON.stringify({ message: "Comment added", comment: newComment }), { status: 201 });
+    // Force approved to false for moderation
+    body.approved = false;
+    const comment = await Comment.create(body);
+    return new Response(JSON.stringify({ message: "Comment submitted and awaiting approval", comment }), { status: 201 });
   } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ error: "Failed to add comment" }), { status: 500 });
+    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 }

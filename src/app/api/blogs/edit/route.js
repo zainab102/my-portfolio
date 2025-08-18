@@ -1,30 +1,23 @@
-import { updateBlog } from "@/models/Blog";
-import { ObjectId } from "mongodb";
+import connectDB from "lib/mongodb";
+import Blog from "@/models/blog"; // lowercase file name
 
 export async function PUT(req) {
   try {
-    const data = await req.json();
-    if (!data.id) {
-      return new Response(JSON.stringify({ error: "Blog ID is required" }), {
-        status: 400,
-      });
-    }
+    await connectDB();
+    const body = await req.json();
+    const { id, ...updateData } = body;
 
-    const updatedData = {
-      title: data.title,
-      slug: data.slug,
-      summary: data.summary || "",
-      content: data.content,
-      image: data.image || "",
-      updatedAt: new Date(),
-    };
-
-    await updateBlog(data.id, updatedData);
+    await Blog.findByIdAndUpdate(id, updateData, { new: true });
 
     return new Response(JSON.stringify({ message: "Blog updated successfully" }), {
       status: 200,
+      headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Failed to update blog" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

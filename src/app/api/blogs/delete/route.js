@@ -1,20 +1,22 @@
-import { deleteBlog } from "@/models/Blog";
+import connectDB from "lib/mongodb";
+import Blog from "@/models/blog"; // lowercase file name
 
 export async function DELETE(req) {
   try {
-    const data = await req.json();
-    if (!data.id) {
-      return new Response(JSON.stringify({ error: "Blog ID is required" }), {
-        status: 400,
-      });
-    }
+    await connectDB();
+    const { id } = await req.json();
 
-    await deleteBlog(data.id);
+    await Blog.findByIdAndDelete(id);
 
     return new Response(JSON.stringify({ message: "Blog deleted successfully" }), {
       status: 200,
+      headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Failed to delete blog" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

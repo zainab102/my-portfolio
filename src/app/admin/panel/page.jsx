@@ -2,22 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import BlogsAdmin from "./BlogsAdmin";
 
-export default function AdminPanelWrapper() {
+export default function AdminPanel() {
+  const [authenticated, setAuthenticated] = useState(false);
   const router = useRouter();
-  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    // Check if user is logged in as admin
-    const isAdmin = localStorage.getItem("isAdmin");
-    if (!isAdmin) {
-      router.push("/admin/login"); // redirect to login if not authorized
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      router.push("/admin/login");
     } else {
-      setAuthorized(true);
+      setAuthenticated(true);
     }
   }, [router]);
 
-  // Only render the admin panel if authorized
-  return authorized ? <BlogsAdmin /> : null;
+  if (!authenticated) return <p>Loading...</p>;
+
+  return (
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
+      {/* Your admin panel content here */}
+      <p>Welcome, Admin! You can manage blogs and comments here.</p>
+    </div>
+  );
 }

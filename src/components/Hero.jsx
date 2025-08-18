@@ -12,7 +12,7 @@ export default function Hero() {
       className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white py-24 px-6 md:px-12 lg:px-20"
     >
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
-        
+
         {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -25,8 +25,7 @@ export default function Hero() {
           </Heading>
 
           <Text as="p" size="4" color="gray" className="max-w-xl mx-auto md:mx-0">
-            A passionate tech enthusiast blending creativity, code, and strategy. I build modern websites,
-            apps, and AI-powered tools to make life smarter and more fun.
+            I’m a tech-driven innovator passionate about turning ideas into digital experiences. From building responsive websites and mobile apps to exploring AI-powered tools, I create solutions that simplify, inspire, and empower users.
           </Text>
 
           {/* Social Icons */}

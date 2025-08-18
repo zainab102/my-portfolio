@@ -1,30 +1,22 @@
-import { addBlog } from "@/models/Blog";
+import connectDB from "lib/mongodb";
+import Blog from "@/models/blog"; // lowercase file name
 
 export async function POST(req) {
   try {
-    const data = await req.json();
+    await connectDB();
+    const body = await req.json();
 
-    // Optional: validate required fields
-    if (!data.title || !data.slug || !data.content) {
-      return new Response(
-        JSON.stringify({ error: "Title, slug, and content are required" }),
-        { status: 400 }
-      );
-    }
+    const blog = await Blog.create(body);
 
-    await addBlog({
-      title: data.title,
-      slug: data.slug,
-      summary: data.summary || "",
-      content: data.content,
-      image: data.image || "",
-      createdAt: new Date(),
-    });
-
-    return new Response(JSON.stringify({ message: "Blog added successfully" }), {
-      status: 200,
+    return new Response(JSON.stringify({ message: "Blog added successfully", blog }), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error(err);
+    return new Response(JSON.stringify({ error: "Failed to add blog" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
