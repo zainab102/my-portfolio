@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
-    const { email, password } = await req.json();
+    const { username, password } = await req.json();
 
     const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-    if (email === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       const token = jwt.sign(
-        { email },
+        { username },
         process.env.JWT_SECRET || "fallback_secret",
         { expiresIn: "1h" }
       );
