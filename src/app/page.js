@@ -1,6 +1,7 @@
 // src/app/page.js
 'use client';
 
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -32,9 +33,9 @@ export default function Home() {
       <section id="about" className="bg-about py-24 px-6 md:px-12">
         <About />
         <div className="text-center mt-6">
-          <a href="/about" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/about" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -42,9 +43,9 @@ export default function Home() {
       <section id="projects" className="bg-projects py-24 px-6 md:px-12">
         <Projects />
         <div className="text-center mt-6">
-          <a href="/projects" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/projects" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -52,9 +53,9 @@ export default function Home() {
       <section id="skills" className="bg-skills py-24 px-6 md:px-12">
         <Skills />
         <div className="text-center mt-6">
-          <a href="/skills" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/skills" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -62,9 +63,9 @@ export default function Home() {
       <section id="experience" className="bg-white/5 py-24 px-6 md:px-12">
         <Experience />
         <div className="text-center mt-6">
-          <a href="/experience" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/experience" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -72,9 +73,9 @@ export default function Home() {
       <section id="certifications" className="bg-white/5 py-24 px-6 md:px-12">
         <Certifications />
         <div className="text-center mt-6">
-          <a href="/certifications" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/certifications" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -82,9 +83,9 @@ export default function Home() {
       <section id="leadership" className="bg-white/5 py-24 px-6 md:px-12">
         <Leadership />
         <div className="text-center mt-6">
-          <a href="/leadership" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/leadership" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -92,9 +93,9 @@ export default function Home() {
       <section id="blogs" className="bg-blogs py-24 px-6 md:px-12">
         <BlogsPreview limit={3} />
         <div className="text-center mt-6">
-          <a href="/blogs" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/blogs" className="text-[var(--color-accent)] font-semibold hover:underline">
             View More &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -102,12 +103,14 @@ export default function Home() {
       <section id="contact" className="bg-contact py-24 px-6 md:px-12">
         <Contact />
         <div className="text-center mt-6">
-          <a href="/contact" className="text-[var(--color-accent)] font-semibold hover:underline">
+          <Link href="/contact" className="text-[var(--color-accent)] font-semibold hover:underline">
             Contact Me &rarr;
-          </a>
+          </Link>
         </div>
       </section>
-      
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }
