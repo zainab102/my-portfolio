@@ -1,39 +1,34 @@
-// Example: src/app/api/blogs/route.js
-import { NextResponse } from 'next/server';
+import clientPromise from "@/lib/mongodb";
 
-// Dummy blogs
-const blogs = [
-  {
-    _id: '1',
-    title: 'Test Blog 1',
-    slug: 'test-blog-1',
-    summary: 'This is a test blog excerpt.',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    _id: '2',
-    title: 'Test Blog 2',
-    slug: 'test-blog-2',
-    summary: 'Another sample blog content.',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    _id: '3',
-    title: 'Test Blog 3',
-    slug: 'test-blog-3',
-    summary: 'More dummy blog text.',
-    createdAt: new Date().toISOString(),
-  },
-];
+export async function GET(req) {
+  try {
+    const url = new URL(req.url);
+    const page = parseInt(url.searchParams.get("page")) || 1;
+    const limit = parseInt(url.searchParams.get("limit")) || 5;
+    const skip = (page - 1) * limit;
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const page = parseInt(searchParams.get('page')) || 1;
-  const limit = parseInt(searchParams.get('limit')) || 3;
+    const client = await clientPromise;
+    const db = client.db("myPortfolio");
+    const blogsCollection = db.collection("blogs");
 
-  const start = (page - 1) * limit;
-  const end = start + limit;
-  const paginatedBlogs = blogs.slice(start, end);
+    const total = await blogsCollection.countDocuments();
+    const blogs = await blogsCollection
+      .find({})
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .toArray();
 
-  return NextResponse.json({ blogs: paginatedBlogs });
+    return new Response(
+      JSON.stringify({
+        blogs,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
 }
