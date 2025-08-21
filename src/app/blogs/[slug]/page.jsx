@@ -1,23 +1,18 @@
-import clientPromise from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export async function generateStaticParams() {
-  const client = await clientPromise;
-  const db = client.db("myPortfolio");
-  const blogs = await db.collection("blogs").find({}, { projection: { slug: 1 } }).toArray();
-
+  await connectDB();
+  const blogs = await Blog.find({}, { slug: 1 });
   return blogs.map((blog) => ({ slug: blog.slug }));
 }
 
 export default async function BlogPost({ params }) {
   const { slug } = params;
-  const client = await clientPromise;
-  const db = client.db("myPortfolio");
+  await connectDB();
+  const blog = await Blog.findOne({ slug });
 
-  const blog = await db.collection("blogs").findOne({ slug });
-
-  if (!blog) {
-    return <p>Blog not found</p>;
-  }
+  if (!blog) return <p>Blog not found</p>;
 
   return (
     <main className="container mx-auto p-6">

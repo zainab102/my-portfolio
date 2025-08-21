@@ -1,9 +1,8 @@
-// lib/mongodb.js
 import mongoose from "mongoose";
 
-let isConnected = false;
+let isConnected = false; // Track connection status
 
-export async function connectDB() {  // ✅ named export
+export async function connectDB() { // Named export
   if (isConnected) return;
 
   try {
