@@ -1,6 +1,6 @@
 // src/app/api/blogs/route.js
 import { connectDB } from "@/lib/mongodb";
-import Blog from "@/models/Blog";
+import Blog from "@/models/Temp";
 
 export async function GET(req) {
   try {

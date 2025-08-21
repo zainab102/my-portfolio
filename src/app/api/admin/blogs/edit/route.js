@@ -1,7 +1,7 @@
 // src/app/api/admin/blogs/edit/route.js
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-import Blog from "@/models/Blog";
+import Blog from "@/models/Temp";
 
 export async function PUT(req) {
   try {
