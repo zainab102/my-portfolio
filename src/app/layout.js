@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth bg-[var(--color-bg)]">
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{metadata.title}</title>
@@ -19,13 +19,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <body className="min-h-screen flex flex-col font-sans text-[var(--color-text)]">
+      {/* Move CSS variable-dependent styling here */}
+      <body className="min-h-screen flex flex-col font-sans bg-[var(--color-bg)] text-[var(--color-text)]">
         {/* Navbar */}
-        {/* This ensures your new Navbar is used across all pages */}
         <Navbar />
 
         {/* Main content */}
-        {/* pt-24 ensures content doesn't go under the fixed navbar */}
         <main className="flex-grow pt-24">{children}</main>
 
         {/* Footer */}

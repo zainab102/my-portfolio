@@ -1,34 +1,14 @@
-import clientPromise from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongodb";  // ✅ named import
+import Blog from "@/models/Blog";
 
-export async function GET(req) {
+export async function GET() {
   try {
-    const url = new URL(req.url);
-    const page = parseInt(url.searchParams.get("page")) || 1;
-    const limit = parseInt(url.searchParams.get("limit")) || 5;
-    const skip = (page - 1) * limit;
-
-    const client = await clientPromise;
-    const db = client.db("myPortfolio");
-    const blogsCollection = db.collection("blogs");
-
-    const total = await blogsCollection.countDocuments();
-    const blogs = await blogsCollection
-      .find({})
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .toArray();
-
-    return new Response(
-      JSON.stringify({
-        blogs,
-        total,
-        page,
-        totalPages: Math.ceil(total / limit),
-      }),
-      { status: 200 }
-    );
+    await connectDB();
+    const blogs = await Blog.find().sort({ createdAt: -1 });
+    return new Response(JSON.stringify(blogs), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+    });
   }
 }

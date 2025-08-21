@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@lib/*": ["src/lib/*"]
-    }
-  }
+      "@/*": ["./src/*"]
+    },
+    "types": ["node", "react", "react-dom"]
+  },
+  "exclude": ["node_modules"]
 }
