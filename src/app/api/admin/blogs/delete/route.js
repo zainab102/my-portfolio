@@ -1,6 +1,6 @@
 // src/app/api/admin/blogs/delete/route.js
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from '@/lib/mongodb'; 
 import Blog from "@/models/Temp";
 
 export async function DELETE(req) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb"; // ✅ named import
+import { connectDB } from '@/lib/mongodb'; 
 import Admin from "@/models/Admin";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
