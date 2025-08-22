@@ -58,7 +58,6 @@ export default function Home() {
         <About />
         <div className="text-center mt-6">
           <Link href="/about" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -68,7 +67,6 @@ export default function Home() {
         <Experience />
         <div className="text-center mt-6">
           <Link href="/experience" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -78,7 +76,6 @@ export default function Home() {
         <Certifications />
         <div className="text-center mt-6">
           <Link href="/certifications" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -88,7 +85,6 @@ export default function Home() {
         <Leadership />
         <div className="text-center mt-6">
           <Link href="/leadership" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -98,7 +94,6 @@ export default function Home() {
         <Projects />
         <div className="text-center mt-6">
           <Link href="/projects" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -108,7 +103,6 @@ export default function Home() {
         <Skills />
         <div className="text-center mt-6">
           <Link href="/skills" className="text-[var(--color-accent)] font-semibold hover:underline">
-            View More &rarr;
           </Link>
         </div>
       </section>
@@ -135,7 +129,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

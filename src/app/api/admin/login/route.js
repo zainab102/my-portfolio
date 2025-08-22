@@ -1,48 +1,47 @@
-import { NextResponse } from "next/server";
-import { connectDB } from '@/lib/mongodb'; 
-import Admin from "@/models/Admin";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
 
 export async function POST(req) {
   try {
-    await connectDB(); // ensures DB connection
-
     const { email, password } = await req.json();
-    if (!email || !password) {
-      return NextResponse.json(
-        { success: false, error: "Email and password are required." },
-        { status: 400 }
+
+    console.log('Login attempt:', { email }); // Debug log
+
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      // Create JWT
+      const token = jwt.sign(
+        { email, role: 'admin' }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: '1d' }
       );
+
+      console.log('Login successful, setting cookie'); // Debug log
+
+      // Set cookie
+      const res = NextResponse.json({ success: true, message: 'Login successful' });
+      res.cookies.set('token', token, { // Changed from 'admin_token' to 'token'
+        httpOnly: true,
+        path: '/',
+        sameSite: 'strict',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24, // 1 day
+      });
+
+      return res;
     }
 
-    const admin = await Admin.findOne({ email });
-    if (!admin) {
-      return NextResponse.json(
-        { success: false, error: "Invalid email or password." },
-        { status: 401 }
-      );
-    }
-
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { success: false, error: "Invalid email or password." },
-        { status: 401 }
-      );
-    }
-
-    const token = jwt.sign(
-      { id: admin._id, email: admin.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
-
-    return NextResponse.json({ success: true, token });
-  } catch (err) {
-    console.error("❌ Admin login error:", err);
+    console.log('Invalid credentials'); // Debug log
     return NextResponse.json(
-      { success: false, error: "Server error." },
+      { success: false, message: 'Invalid credentials' }, 
+      { status: 401 }
+    );
+  } catch (error) {
+    console.error('Login error:', error);
+    return NextResponse.json(
+      { success: false, message: 'Server error' }, 
       { status: 500 }
     );
   }

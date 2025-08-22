@@ -5,6 +5,7 @@ export default function AddBlogPage() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");
+  const [tags, setTags] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,12 +13,12 @@ export default function AddBlogPage() {
     const res = await fetch("/api/admin/blogs/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, slug, content }),
+      body: JSON.stringify({ title, slug, content, tags: tags.split(",") }),
     });
 
     if (res.ok) {
       alert("Blog added successfully!");
-      window.location.href = "/admin/dashboard";
+      window.location.href = "/admin/dashboard"; // Redirect to dashboard after adding
     } else {
       alert("Error adding blog.");
     }
@@ -33,6 +34,7 @@ export default function AddBlogPage() {
           className="border p-2 w-full"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <input
           type="text"
@@ -40,12 +42,21 @@ export default function AddBlogPage() {
           className="border p-2 w-full"
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
+          required
         />
         <textarea
           placeholder="Content"
           className="border p-2 w-full h-40"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Tags (comma separated)"
+          className="border p-2 w-full"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
         />
         <button
           type="submit"

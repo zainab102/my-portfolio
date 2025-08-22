@@ -8,7 +8,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 const NAV_ITEMS = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' }, // new section
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'blogs', label: 'Blogs' },
@@ -19,8 +19,23 @@ export default function Navbar() {
   const [active, setActive] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [admin, setAdmin] = useState(false);
+
   const pathname = usePathname();
   const router = useRouter();
+
+  // Check admin session
+  useEffect(() => {
+    fetch("/api/admin/me")
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin));
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
+    setAdmin(false);
+    router.push("/admin/login");
+  };
 
   // Highlight current section while scrolling
   useEffect(() => {
@@ -29,7 +44,7 @@ export default function Navbar() {
       const scrollPos = window.scrollY + 100;
       let current = 'hero';
       NAV_ITEMS.forEach((item) => {
-        if (item.id === 'blogs') return; // blogs may be separate
+        if (item.id === 'blogs') return; // skip blogs
         const section = document.getElementById(item.id);
         if (section && section.offsetTop <= scrollPos) {
           current = item.id;
@@ -57,12 +72,10 @@ export default function Navbar() {
     }
 
     if (pathname === '/') {
-      // scroll to section on homepage
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: 'smooth' });
       setActive(id);
     } else {
-      // navigate to homepage first then scroll
       router.push(`/#${id}`);
     }
   };
@@ -107,10 +120,29 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex space-x-8 font-medium">
+        <ul className="hidden md:flex items-center space-x-6 font-medium">
           {NAV_ITEMS.map(({ id, label }) => (
             <li key={id}>{renderLink(id, label)}</li>
           ))}
+
+          {/* Admin login/logout button */}
+          <li>
+            {admin ? (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
+              >
+                Logout
+              </button>
+            ) : (
+              <a
+                href="/admin/login"
+                className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
+              >
+                Admin Login
+              </a>
+            )}
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -131,6 +163,25 @@ export default function Navbar() {
             {NAV_ITEMS.map(({ id, label }) => (
               <li key={id}>{renderLink(id, label)}</li>
             ))}
+
+            {/* Admin login/logout button */}
+            <li>
+              {admin ? (
+                <button
+                  onClick={handleLogout}
+                  className="w-full px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
+                >
+                  Logout
+                </button>
+              ) : (
+                <a
+                  href="/admin/login"
+                  className="w-full px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
+                >
+                  Admin Login
+                </a>
+              )}
+            </li>
           </ul>
         </div>
       )}
