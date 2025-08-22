@@ -1,37 +1,8 @@
-import { connectDB } from '@/lib/mongodb';
-import Blog from "@/models/Temp";
-import CommentSection from './CommentSection'; // Import client component
+"use client";
 
-export async function generateStaticParams() {
-  await connectDB();
-  const blogs = await Blog.find({}, { slug: 1 });
-  return blogs.map((blog) => ({ slug: blog.slug }));
-}
+import { useState, useEffect } from "react";
 
-export default async function BlogPost({ params }) {
-  const { slug } = params;
-  await connectDB();
-  const blog = await Blog.findOne({ slug });
-
-  if (!blog) return <p>Blog not found</p>;
-
-  return (
-    <main className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
-      <p className="text-gray-500 mb-8">{new Date(blog.createdAt).toLocaleDateString()}</p>
-      <article className="prose max-w-none">
-        {blog.content.split("\n").map((line, idx) => (
-          <p key={idx}>{line}</p>
-        ))}
-      </article>
-
-      {/* Client Component for comments */}
-      <CommentSection blogId={blog._id.toString()} />
-    </main>
-  );
-}
-
-function CommentSection({ blogId }) {
+export default function CommentSection({ blogId }) {
   const [comments, setComments] = useState([]);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
@@ -56,7 +27,6 @@ function CommentSection({ blogId }) {
     if (res.ok) {
       setText("");
       setName("");
-      // Re-fetch comments after adding a new one
       const newComments = await fetch(`/api/comments/get?blogId=${blogId}`);
       setComments(await newComments.json());
     }
