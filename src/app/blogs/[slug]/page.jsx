@@ -1,19 +1,37 @@
-import { connectDB } from '@/lib/mongodb';
-import Blog from "@/models/Temp";
-import CommentSection from './CommentSection'; // Import client component
+"use client";
 
-export async function generateStaticParams() {
-  await connectDB();
-  const blogs = await Blog.find({}, { slug: 1 });
-  return blogs.map((blog) => ({ slug: blog.slug }));
-}
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
-export default async function BlogPost({ params }) {
-  const { slug } = params;
-  await connectDB();
-  const blog = await Blog.findOne({ slug });
+export default function BlogPost() {
+  const params = useParams();
+  const slug = params.slug;
 
-  if (!blog) return <p>Blog not found</p>;
+  const [blog, setBlog] = useState(null);
+  const [loadingBlog, setLoadingBlog] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch blog data from your API
+  useEffect(() => {
+    async function fetchBlog() {
+      try {
+        const res = await fetch(`/api/blogs/${slug}`);
+        if (!res.ok) {
+          throw new Error("Blog not found");
+        }
+        const data = await res.json();
+        setBlog(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoadingBlog(false);
+      }
+    }
+    fetchBlog();
+  }, [slug]);
+
+  if (loadingBlog) return <p>Loading blog...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <main className="container mx-auto p-6">
@@ -25,8 +43,7 @@ export default async function BlogPost({ params }) {
         ))}
       </article>
 
-      {/* Client Component for comments */}
-      <CommentSection blogId={blog._id.toString()} />
+      <CommentSection blogId={blog._id} />
     </main>
   );
 }
@@ -56,7 +73,6 @@ function CommentSection({ blogId }) {
     if (res.ok) {
       setText("");
       setName("");
-      // Re-fetch comments after adding a new one
       const newComments = await fetch(`/api/comments/get?blogId=${blogId}`);
       setComments(await newComments.json());
     }
