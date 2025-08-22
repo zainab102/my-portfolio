@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaHeart, FaRocket, FaCode } from 'react-icons/fa';
 
@@ -37,21 +38,28 @@ export default function Footer() {
     }
   ];
 
+  // 🦋 Butterfly random positions (client only)
+  const [butterflies, setButterflies] = useState([]);
+
+  useEffect(() => {
+    const generated = [...Array(3)].map((_, i) => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${i * 6}s`,
+      animationDuration: `${20 + Math.random() * 10}s`
+    }));
+    setButterflies(generated);
+  }, []);
+
   return (
-    <footer className="bg-gradient-to-br from-gray-50 via-white to-cream-50 text-gray-900 py-20 px-6 border-t-2 border-gray-200">
+    <footer className="bg-gradient-to-br from-gray-50 via-white to-cream-50 text-gray-900 py-20 px-6 border-t-2 border-gray-200 relative">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Footer-specific butterflies */}
-        {[...Array(3)].map((_, i) => (
+        {butterflies.map((style, i) => (
           <div
             key={`footer-butterfly-${i}`}
             className="absolute animate-float opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 6}s`,
-              animationDuration: `${20 + Math.random() * 10}s`,
-            }}
+            style={style}
           >
             <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
               🦋
