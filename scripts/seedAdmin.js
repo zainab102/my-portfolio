@@ -1,39 +1,31 @@
-// scripts/seedAdmin.js
+// scripts/seedBlogs.js
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
-import dotenv from "dotenv";
-import Admin from "../src/models/Admin.js";
+import Blog from "../src/models/Blog.js";
+import connectDB from "../src/lib/mongodb.js";
 
-dotenv.config();
-
-const seedAdmin = async () => {
-  try {
-    // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI, { dbName: "myBlogApp" });
-    console.log("✅ Connected to MongoDB");
-
-    // Remove existing admin with same username/email
-    await Admin.deleteMany({ username: "admin" });
-    console.log("🗑️ Existing admin removed (if any)");
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
-
-    // Create new admin
-    const admin = new Admin({
-      username: "admin",
-      email: process.env.ADMIN_EMAIL,
-      password: hashedPassword,
-    });
-
-    await admin.save();
-    console.log("🎉 Admin created successfully:", admin.email);
-
-    process.exit(0);
-  } catch (error) {
-    console.error("❌ Error seeding admin:", error);
-    process.exit(1);
+const blogs = [
+  {
+    title: "My First Blog",
+    slug: "my-first-blog",
+    content: "This is my first blog post, added via script!",
+    author: "Zainab",
+    createdAt: new Date(),
+  },
+  {
+    title: "Second Blog Post",
+    slug: "second-blog",
+    content: "Another blog seeded directly into MongoDB.",
+    author: "Zainab",
+    createdAt: new Date(),
   }
+];
+
+const seedBlogs = async () => {
+  await connectDB();
+  await Blog.deleteMany();
+  await Blog.insertMany(blogs);
+  console.log("✅ Blogs seeded!");
+  mongoose.connection.close();
 };
 
-seedAdmin();
+seedBlogs();
