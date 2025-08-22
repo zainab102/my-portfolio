@@ -1,6 +1,10 @@
+'use client';
+
 import { connectDB } from '@/lib/mongodb'; 
 import Blog from "@/models/Temp";
 import { useState, useEffect } from "react";
+
+// Your component code
 
 export async function generateStaticParams() {
   await connectDB();
