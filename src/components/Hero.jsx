@@ -186,7 +186,7 @@ export default function Hero() {
               {[
                 { icon: FaGithub, href: 'https://github.com/zainab102', label: 'GitHub', color: 'hover:text-gray-800', bgHover: 'hover:bg-gray-100' },
                 { icon: FaLinkedin, href: 'https://linkedin.com/in/zainab-22243b366', label: 'LinkedIn', color: 'hover:text-blue-700', bgHover: 'hover:bg-blue-50' },
-                { icon: FaEnvelope, href: 'mailto:zainab@example.com', label: 'Email', color: 'hover:text-red-700', bgHover: 'hover:bg-red-50' },
+                { icon: FaEnvelope, href: 'mailto:tariqzainab1190@gmail.com', label: 'Email', color: 'hover:text-red-700', bgHover: 'hover:bg-red-50' },
               ].map((social, index) => (
                 <a key={index} href={social.href} target={social.href.includes('mailto') ? undefined : '_blank'} rel={social.href.includes('mailto') ? undefined : 'noopener noreferrer'} className={`group flex items-center space-x-3 text-gray-700 ${social.color} transition-all duration-300 transform hover:scale-110`}>
                   <div className={`p-4 bg-white border border-gray-300 rounded-full group-hover:border-gray-400 ${social.bgHover} transition-all duration-300 shadow-sm group-hover:shadow-md`}>

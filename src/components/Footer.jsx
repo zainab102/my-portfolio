@@ -31,7 +31,7 @@ export default function Footer() {
     },
     {
       icon: FaEnvelope,
-      href: 'mailto:zainab@example.com',
+      href: 'mailto:tariqzainab1190@gmail.com',
       label: 'Email',
       color: 'hover:text-rose-700',
       bgColor: 'hover:bg-rose-50'

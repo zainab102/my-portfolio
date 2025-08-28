@@ -1,13 +1,13 @@
 // src/app/api/blogs/[slug]/route.js
 import { connectDB } from "@/lib/mongodb";
-import Blog from "@/models/Blog";
 
-export async function GET(req, { params }) {
+export async function GET(req) {
   try {
-    await connectDB();
+    const url = new URL(req.url);
+    const slug = url.pathname.split("/").pop(); // get slug from URL
 
-    const { slug } = params;
-    const blog = await Blog.findOne({ slug });
+    const db = await connectDB();
+    const blog = await db.collection("blogs").findOne({ slug });
 
     if (!blog) {
       return new Response(JSON.stringify({ error: "Blog not found" }), { status: 404 });

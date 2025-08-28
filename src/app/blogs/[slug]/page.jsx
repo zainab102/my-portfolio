@@ -29,6 +29,7 @@ export default function BlogPost() {
         setLoadingBlog(false);
       }
     }
+
     fetchBlog();
   }, [slug]);
 
@@ -58,10 +59,7 @@ export default function BlogPost() {
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
               ) : (
-                <code
-                  className="bg-gray-800 text-white px-1 rounded"
-                  {...props}
-                >
+                <code className="bg-gray-800 text-white px-1 rounded" {...props}>
                   {children}
                 </code>
               );
