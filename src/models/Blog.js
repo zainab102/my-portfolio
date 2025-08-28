@@ -1,15 +1,15 @@
+// models/Blog.js
 import mongoose from "mongoose";
 
-const BlogSchema = new mongoose.Schema(
-  {
-    title: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    content: { type: String, required: true },
-    author: { type: String, default: "Admin" },
-    tags: { type: [String], default: [] },
-  },
-  { timestamps: true }
-);
+const BlogSchema = new mongoose.Schema({
+  title: String,
+  slug: String,
+  content: String,
+  author: String,
+  createdAt: { type: Date, default: Date.now },
+  tags: [String],
+});
 
-// Use existing model if it exists (Next.js hot reload safe)
-export default mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
+
+export default Blog;

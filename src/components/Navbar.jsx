@@ -25,17 +25,17 @@ export default function Navbar() {
   const router = useRouter();
 
   // Check admin session
-  useEffect(() => {
-    fetch("/api/admin/me")
-      .then(res => res.json())
-      .then(data => setAdmin(data.admin));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/admin/me")
+  //     .then(res => res.json())
+  //     .then(data => setAdmin(data.admin));
+  // }, []);
 
-  const handleLogout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" });
-    setAdmin(false);
-    router.push("/admin/login");
-  };
+  // const handleLogout = async () => {
+  //   await fetch("/api/admin/logout", { method: "POST" });
+  //   setAdmin(false);
+  //   router.push("/admin/login");
+  // };
 
   // Highlight current section while scrolling
   useEffect(() => {
@@ -126,7 +126,7 @@ export default function Navbar() {
           ))}
 
           {/* Admin login/logout button */}
-          <li>
+          {/* <li>
             {admin ? (
               <button
                 onClick={handleLogout}
@@ -142,7 +142,7 @@ export default function Navbar() {
                 Admin Login
               </a>
             )}
-          </li>
+          </li> */}
         </ul>
 
         {/* Mobile Menu Button */}
@@ -165,7 +165,7 @@ export default function Navbar() {
             ))}
 
             {/* Admin login/logout button */}
-            <li>
+            {/* <li>
               {admin ? (
                 <button
                   onClick={handleLogout}
@@ -181,7 +181,7 @@ export default function Navbar() {
                   Admin Login
                 </a>
               )}
-            </li>
+            </li> */}
           </ul>
         </div>
       )}

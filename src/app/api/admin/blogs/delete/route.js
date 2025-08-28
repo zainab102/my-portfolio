@@ -1,37 +1,37 @@
-// src/app/api/admin/blogs/delete/route.js
-import { NextResponse } from "next/server";
-import { connectDB } from '@/lib/mongodb'; 
-import Blog from "@/models/Temp";
+// // src/app/api/admin/blogs/delete/route.js
+// import { NextResponse } from "next/server";
+// import { connectDB } from '@/lib/mongodb'; 
+// import Blog from "@/models/Temp";
 
-export async function DELETE(req) {
-  try {
-    await connectDB();
+// export async function DELETE(req) {
+//   try {
+//     await connectDB();
 
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
+//     const { searchParams } = new URL(req.url);
+//     const id = searchParams.get("id");
 
-    if (!id) {
-      return NextResponse.json(
-        { success: false, message: "Blog ID is required." },
-        { status: 400 }
-      );
-    }
+//     if (!id) {
+//       return NextResponse.json(
+//         { success: false, message: "Blog ID is required." },
+//         { status: 400 }
+//       );
+//     }
 
-    const deletedBlog = await Blog.findByIdAndDelete(id);
+//     const deletedBlog = await Blog.findByIdAndDelete(id);
 
-    if (!deletedBlog) {
-      return NextResponse.json(
-        { success: false, message: "Blog not found." },
-        { status: 404 }
-      );
-    }
+//     if (!deletedBlog) {
+//       return NextResponse.json(
+//         { success: false, message: "Blog not found." },
+//         { status: 404 }
+//       );
+//     }
 
-    return NextResponse.json({ success: true, message: "Blog deleted." });
-  } catch (err) {
-    console.error("❌ Error deleting blog:", err);
-    return NextResponse.json(
-      { success: false, message: "Failed to delete blog." },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json({ success: true, message: "Blog deleted." });
+//   } catch (err) {
+//     console.error("❌ Error deleting blog:", err);
+//     return NextResponse.json(
+//       { success: false, message: "Failed to delete blog." },
+//       { status: 500 }
+//     );
+//   }
+// }

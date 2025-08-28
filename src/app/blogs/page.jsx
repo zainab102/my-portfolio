@@ -1,79 +1,56 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 
-const PAGE_SIZE = 5;
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalBlogs, setTotalBlogs] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchBlogs() {
-      setLoading(true);
       try {
-        const res = await fetch(`/api/blogs?page=${page}&limit=${PAGE_SIZE}`);
+        const res = await fetch("/api/blogs");
+        if (!res.ok) throw new Error("Failed to fetch blogs");
         const data = await res.json();
-        setBlogs(data.blogs);
-        setTotalBlogs(data.total);
+
+        // Ensure it's an array
+        if (!Array.isArray(data)) throw new Error("Invalid data format");
+        setBlogs(data);
       } catch (err) {
-        console.error("Failed to load blogs:", err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     }
     fetchBlogs();
-  }, [page]);
+  }, []);
 
-  const totalPages = Math.ceil(totalBlogs / PAGE_SIZE);
+  if (loading) return <p>Loading blogs...</p>;
+  if (error) return <p>{error}</p>;
+  if (blogs.length === 0) return <p>No blogs found.</p>;
 
   return (
-    <section className="bg-[var(--color-projects-bg)] text-white py-20 px-6 min-h-screen">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-[var(--color-primary)]">Blogs</h1>
-
-        {loading && <p>Loading blogs...</p>}
-        {!loading && Array.isArray(blogs) && blogs.length === 0 && <p>No blogs found.</p>}
-
-        <ul className="space-y-8">
-          {blogs.map((blog) => (
-            <li key={blog._id} className="border-b border-gray-600 pb-6">
-              <Link href={`/blogs/${blog.slug}`}>
-                <h2 className="text-2xl font-semibold mb-2 text-[var(--color-accent)] hover:underline">
-                  {blog.title}
-                </h2>
-              </Link>
-              <p className="text-gray-300 mb-2">{blog.summary}</p>
-              <small className="text-gray-500">
-                Published on {new Date(blog.createdAt).toLocaleDateString()}
-              </small>
-            </li>
-          ))}
-        </ul>
-
-        {/* Pagination */}
-        <div className="flex justify-center mt-12 space-x-4">
-          <button
-            disabled={page === 1}
-            onClick={() => setPage((p) => Math.max(p - 1, 1))}
-            className="px-4 py-2 bg-[var(--color-primary)] text-black rounded-md disabled:opacity-50"
+    <main className="container mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-8">All Blogs</h1>
+      <div className="grid gap-6 md:grid-cols-3">
+        {blogs.map((blog, i) => (
+          <div
+            key={blog._id || i}
+            className="p-6 bg-white/10 rounded-lg hover:bg-white/20 transition"
           >
-            Previous
-          </button>
-          <span className="px-4 py-2 text-[var(--color-primary)]">
-            Page {page} of {totalPages}
-          </span>
-          <button
-            disabled={page === totalPages}
-            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-            className="px-4 py-2 bg-[var(--color-primary)] text-black rounded-md disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
+            <h3 className="text-xl font-semibold">{blog.title}</h3>
+            <p className="mt-2">{blog.summary || blog.excerpt || ""}</p>
+            <Link
+              href={`/blogs/${blog.slug}`}
+              className="text-[var(--color-accent)] mt-2 inline-block"
+            >
+              Read More →
+            </Link>
+          </div>
+        ))}
       </div>
-    </section>
+    </main>
   );
 }

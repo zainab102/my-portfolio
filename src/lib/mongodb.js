@@ -1,30 +1,27 @@
-// lib/mongodb.js
+// src/lib/mongodb.js
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+const dbName = process.env.MONGODB_DB;
 
-if (!uri) throw new Error("Please define the MONGODB_URI in .env.local");
+if (!uri) throw new Error("Please define the MONGODB_URI environment variable");
+if (!dbName) throw new Error("Please define the MONGODB_DB environment variable");
 
-let client;
-let clientPromise;
+let cachedClient = null;
+let cachedDb = null;
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
-
-// Export a function to get the database
 export async function connectDB() {
-  const client = await clientPromise;
-  const db = client.db(process.env.MONGODB_DB || "myPortfolio");
+  if (cachedDb && cachedClient) {
+    return cachedDb;
+  }
+
+  const client = new MongoClient(uri);
+  await client.connect();
+
+  const db = client.db(dbName);
+
+  cachedClient = client;
+  cachedDb = db;
+
   return db;
 }
-
-export default clientPromise;
