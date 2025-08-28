@@ -151,7 +151,7 @@ export default function Skills() {
           </div>
         </motion.div>
 
-        {/* Back to Home Button */}
+        {/* View All Skills Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -159,10 +159,10 @@ export default function Skills() {
           className="text-center mt-12"
         >
           <Link
-            href="/"
+            href="/skills"
             className="inline-flex items-center px-10 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-lg rounded-xl transition-transform transform hover:scale-105 light-shadow-xl"
           >
-            Back to Home
+            View All Skills
           </Link>
         </motion.div>
       </div>

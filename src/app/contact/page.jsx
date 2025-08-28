@@ -53,7 +53,7 @@ export default function Contact() {
       icon: FaLinkedin,
       title: 'LinkedIn',
       description: 'Connect professionally',
-      contact: 'Zainab Tariq',
+      contact: 'Zainab',
       link: 'https://linkedin.com/in/zainab-22243b366',
       bgColor: 'from-cyan-50 to-blue-50',
       borderColor: 'border-cyan-200',

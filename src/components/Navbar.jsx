@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -19,32 +18,17 @@ export default function Navbar() {
   const [active, setActive] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [admin, setAdmin] = useState(false);
 
   const pathname = usePathname();
   const router = useRouter();
 
-  // Check admin session
-  // useEffect(() => {
-  //   fetch("/api/admin/me")
-  //     .then(res => res.json())
-  //     .then(data => setAdmin(data.admin));
-  // }, []);
-
-  // const handleLogout = async () => {
-  //   await fetch("/api/admin/logout", { method: "POST" });
-  //   setAdmin(false);
-  //   router.push("/admin/login");
-  // };
-
-  // Highlight current section while scrolling
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 10);
       const scrollPos = window.scrollY + 100;
       let current = 'hero';
       NAV_ITEMS.forEach((item) => {
-        if (item.id === 'blogs') return; // skip blogs
+        if (item.id === 'blogs') return;
         const section = document.getElementById(item.id);
         if (section && section.offsetTop <= scrollPos) {
           current = item.id;
@@ -57,7 +41,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Highlight blogs if on /blogs page
   useEffect(() => {
     if (pathname === '/blogs') setActive('blogs');
   }, [pathname]);
@@ -86,16 +69,16 @@ export default function Navbar() {
       <a
         href={`#${id}`}
         onClick={(e) => handleClick(e, id)}
-        className={`relative px-3 py-2 rounded-md transition-colors duration-200 ${
-          isActive
-            ? 'text-[var(--color-primary)] font-semibold'
-            : 'text-[var(--color-secondary)] hover:text-[var(--color-primary)]'
+        className={`relative px-3 py-2 rounded-md transition-colors duration-200
+          ${isActive
+            ? 'text-[var(--color-primary)] font-semibold dark:text-amber-400'
+            : 'text-[var(--color-secondary)] hover:text-[var(--color-primary)] dark:text-gray-300 dark:hover:text-amber-400'
         }`}
       >
         {label}
         {isActive && id !== 'blogs' && (
           <span
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)] rounded"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)] dark:bg-amber-400 rounded"
             aria-hidden="true"
           />
         )}
@@ -105,15 +88,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full top-0 left-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-[var(--color-bg)] shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed w-full top-0 left-0 z-50 transition-colors duration-300
+        ${scrolled ? 'bg-[var(--color-bg)] shadow-md dark:bg-gray-900' : 'bg-transparent'}
+      `}
     >
       <div className="container flex items-center justify-between py-4 px-6 md:px-12">
         {/* Logo */}
         <a
           href="#hero"
-          className="text-[var(--color-primary)] font-bold text-xl"
+          className="text-[var(--color-primary)] dark:text-amber-400 font-bold text-xl"
           onClick={(e) => handleClick(e, 'hero')}
         >
           Zainab
@@ -124,30 +107,11 @@ export default function Navbar() {
           {NAV_ITEMS.map(({ id, label }) => (
             <li key={id}>{renderLink(id, label)}</li>
           ))}
-
-          {/* Admin login/logout button */}
-          {/* <li>
-            {admin ? (
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
-              >
-                Logout
-              </button>
-            ) : (
-              <a
-                href="/admin/login"
-                className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
-              >
-                Admin Login
-              </a>
-            )}
-          </li> */}
         </ul>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-[var(--color-primary)] text-2xl focus:outline-none"
+          className="md:hidden text-[var(--color-primary)] dark:text-amber-400 text-2xl focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
@@ -158,30 +122,11 @@ export default function Navbar() {
 
       {/* Mobile Nav Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[var(--color-bg)] px-6 py-6 shadow-lg">
+        <div className="md:hidden bg-[var(--color-bg)] dark:bg-gray-900 px-6 py-6 shadow-lg">
           <ul className="flex flex-col space-y-4 font-medium">
             {NAV_ITEMS.map(({ id, label }) => (
               <li key={id}>{renderLink(id, label)}</li>
             ))}
-
-            {/* Admin login/logout button */}
-            {/* <li>
-              {admin ? (
-                <button
-                  onClick={handleLogout}
-                  className="w-full px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
-                >
-                  Logout
-                </button>
-              ) : (
-                <a
-                  href="/admin/login"
-                  className="w-full px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition"
-                >
-                  Admin Login
-                </a>
-              )}
-            </li> */}
           </ul>
         </div>
       )}

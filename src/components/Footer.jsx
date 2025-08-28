@@ -19,26 +19,25 @@ export default function Footer() {
       icon: FaGithub,
       href: 'https://github.com/zainab102',
       label: 'GitHub',
-      color: 'hover:text-gray-900',
-      bgColor: 'hover:bg-gray-100'
+      color: 'hover:text-gray-900 dark:hover:text-gray-200',
+      bgColor: 'hover:bg-gray-100 dark:hover:bg-gray-700'
     },
     {
       icon: FaLinkedin,
       href: 'https://linkedin.com/in/zainab-22243b366',
       label: 'LinkedIn',
-      color: 'hover:text-blue-700',
-      bgColor: 'hover:bg-blue-50'
+      color: 'hover:text-blue-700 dark:hover:text-blue-400',
+      bgColor: 'hover:bg-blue-50 dark:hover:bg-blue-800'
     },
     {
       icon: FaEnvelope,
       href: 'mailto:tariqzainab1190@gmail.com',
       label: 'Email',
-      color: 'hover:text-rose-700',
-      bgColor: 'hover:bg-rose-50'
+      color: 'hover:text-rose-700 dark:hover:text-rose-400',
+      bgColor: 'hover:bg-rose-50 dark:hover:bg-rose-800'
     }
   ];
 
-  // 🦋 Butterfly random positions (client only)
   const [butterflies, setButterflies] = useState([]);
 
   useEffect(() => {
@@ -52,8 +51,9 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-gradient-to-br from-gray-50 via-white to-cream-50 text-gray-900 py-20 px-6 border-t-2 border-gray-200 relative">
-      {/* Animated Background Elements */}
+    <footer className="bg-gradient-to-br from-gray-50 via-white to-cream-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-gray-100 py-20 px-6 border-t-2 border-gray-200 dark:border-gray-700 relative">
+      
+      {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {butterflies.map((style, i) => (
           <div
@@ -68,14 +68,8 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* Subtle Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-amber-200 to-yellow-200 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-gradient-to-br from-rose-200 to-pink-200 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-      </div>
-
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Inspirational Quote Section */}
+        {/* Inspirational Quote */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,23 +77,23 @@ export default function Footer() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="bg-white/90 backdrop-blur-lg border-2 border-gray-200 rounded-3xl p-10 light-shadow-xl max-w-4xl mx-auto">
+          <div className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-10 light-shadow-xl max-w-4xl mx-auto">
             <div className="mb-6">
               <span className="text-6xl">✨</span>
             </div>
-            <blockquote className="text-3xl md:text-4xl font-black text-gray-800 mb-6 italic leading-tight">
+            <blockquote className="text-3xl md:text-4xl font-black mb-6 italic leading-tight text-gray-800 dark:text-gray-100">
               "Don't just go through life, grow through life."
             </blockquote>
-            <cite className="text-xl md:text-2xl text-amber-700 font-bold">
+            <cite className="text-xl md:text-2xl text-amber-700 dark:text-amber-400 font-bold">
               – Eric Butterworth
             </cite>
             <div className="mt-6 w-24 h-1 bg-gradient-to-r from-amber-500 to-rose-500 mx-auto rounded-full"></div>
           </div>
         </motion.div>
 
-        {/* Main Footer Content */}
+        {/* Footer Grid */}
         <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Branding & Description */}
+          {/* Branding */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +101,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="md:col-span-2 space-y-6"
           >
-            <div className="bg-white/90 backdrop-blur-lg border-2 border-gray-200 rounded-3xl p-8 light-shadow-xl">
+            <div className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 light-shadow-xl">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-rose-500 rounded-full flex items-center justify-center mr-4">
                   <FaCode className="text-white" size={24} />
@@ -116,29 +110,25 @@ export default function Footer() {
                   Zainab.dev
                 </h2>
               </div>
-              
-              <p className="text-gray-700 text-lg leading-relaxed mb-4 font-medium">
+              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-4 font-medium">
                 Tech-driven innovator • Lifelong learner • Digital creator
               </p>
-              
-              <p className="text-gray-600 leading-relaxed">
-                Passionate about transforming ideas into digital experiences through the power of 
-                technology, creativity, and innovation. Always learning, always growing.
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Passionate about transforming ideas into digital experiences through technology, creativity, and innovation. Always learning, always growing.
               </p>
 
-              {/* Mini Stats */}
               <div className="grid grid-cols-3 gap-4 mt-6">
-                <div className="text-center p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                  <div className="text-2xl font-black text-blue-700">20+</div>
-                  <div className="text-blue-600 text-xs font-semibold">Projects</div>
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-xl">
+                  <div className="text-2xl font-black text-blue-700 dark:text-blue-300">20+</div>
+                  <div className="text-blue-600 dark:text-blue-200 text-xs font-semibold">Projects</div>
                 </div>
-                <div className="text-center p-4 bg-green-50 border border-green-200 rounded-xl">
-                  <div className="text-2xl font-black text-green-700">15+</div>
-                  <div className="text-green-600 text-xs font-semibold">Certifications</div>
+                <div className="text-center p-4 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-xl">
+                  <div className="text-2xl font-black text-green-700 dark:text-green-300">15+</div>
+                  <div className="text-green-600 dark:text-green-200 text-xs font-semibold">Certifications</div>
                 </div>
-                <div className="text-center p-4 bg-purple-50 border border-purple-200 rounded-xl">
-                  <div className="text-2xl font-black text-purple-700">3+</div>
-                  <div className="text-purple-600 text-xs font-semibold">Years Learning</div>
+                <div className="text-center p-4 bg-purple-50 dark:bg-purple-900 border border-purple-200 dark:border-purple-700 rounded-xl">
+                  <div className="text-2xl font-black text-purple-700 dark:text-purple-300">3+</div>
+                  <div className="text-purple-600 dark:text-purple-200 text-xs font-semibold">Years Learning</div>
                 </div>
               </div>
             </div>
@@ -151,9 +141,9 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white/90 backdrop-blur-lg border-2 border-gray-200 rounded-3xl p-8 light-shadow-xl h-full">
-              <h3 className="text-2xl font-black text-gray-800 mb-6 flex items-center">
-                <FaRocket className="mr-3 text-amber-600" />
+            <div className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 light-shadow-xl h-full">
+              <h3 className="text-2xl font-black mb-6 flex items-center text-gray-800 dark:text-gray-100">
+                <FaRocket className="mr-3 text-amber-600 dark:text-amber-400" />
                 Quick Links
               </h3>
               <ul className="space-y-3">
@@ -161,7 +151,7 @@ export default function Footer() {
                   <li key={index}>
                     <a
                       href={link.href}
-                      className="flex items-center text-gray-600 hover:text-amber-700 transition-colors duration-300 group py-2"
+                      className={`flex items-center text-gray-600 dark:text-gray-300 ${socialLinks.color} hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 group py-2`}
                     >
                       <div className="w-2 h-2 bg-amber-500 rounded-full mr-3 group-hover:bg-rose-500 transition-colors"></div>
                       <span className="font-semibold group-hover:translate-x-1 transition-transform">{link.name}</span>
@@ -172,19 +162,20 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Connect Section */}
+          {/* Let's Connect */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white/90 backdrop-blur-lg border-2 border-gray-200 rounded-3xl p-8 light-shadow-xl h-full">
-              <h3 className="text-2xl font-black text-gray-800 mb-6">Let's Connect</h3>
-              <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+            <div className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 light-shadow-xl h-full">
+              <h3 className="text-2xl font-black mb-6 text-gray-800 dark:text-gray-100">
+                Let's Connect
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
                 Follow my journey and connect with me on social platforms for updates, insights, and collaboration opportunities.
               </p>
-              
               <div className="space-y-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -192,9 +183,9 @@ export default function Footer() {
                     href={social.href}
                     target={social.href.includes('mailto') ? undefined : '_blank'}
                     rel={social.href.includes('mailto') ? undefined : 'noopener noreferrer'}
-                    className={`group flex items-center space-x-3 text-gray-700 ${social.color} transition-all duration-300 p-3 rounded-xl hover:scale-105 ${social.bgColor} border border-gray-200 hover:border-gray-300`}
+                    className={`group flex items-center space-x-3 text-gray-700 dark:text-gray-300 ${social.color} transition-all duration-300 p-3 rounded-xl hover:scale-105 ${social.bgColor} border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-500`}
                   >
-                    <div className="p-2 bg-white rounded-full light-shadow group-hover:scale-110 transition-transform">
+                    <div className="p-2 bg-white dark:bg-gray-800 rounded-full light-shadow group-hover:scale-110 transition-transform">
                       <social.icon size={20} />
                     </div>
                     <span className="font-bold">{social.label}</span>
@@ -211,29 +202,27 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
-          className="border-t-2 border-gray-200 pt-8"
+          className="border-t-2 border-gray-200 dark:border-gray-700 pt-8"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            {/* Copyright */}
             <div className="text-center md:text-left">
-              <p className="text-gray-600 font-semibold">
-                © {new Date().getFullYear()} <span className="text-amber-700 font-bold">Zainab Tariq</span>. All rights reserved.
+              <p className="text-gray-600 dark:text-gray-400 font-semibold">
+                © {new Date().getFullYear()} <span className="text-amber-700 dark:text-amber-400 font-bold">Zainab</span>. All rights reserved.
               </p>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Crafted with passion and dedication
               </p>
             </div>
 
-            {/* Tech Stack */}
             <div className="text-center md:text-right">
-              <p className="text-gray-600 text-sm mb-2 font-semibold">
-                Built with <FaHeart className="inline text-rose-500 mx-1" size={14} /> using:
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2 font-semibold">
+                Built with <FaHeart className="inline text-rose-500 dark:text-rose-400 mx-1" size={14} /> using:
               </p>
               <div className="flex flex-wrap gap-2 justify-center md:justify-end">
                 {['Next.js', 'React', 'Tailwind CSS', 'MongoDB'].map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold border border-gray-200 hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-xs font-bold border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
                     {tech}
                   </span>
@@ -242,7 +231,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Back to Top */}
           <div className="text-center mt-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
