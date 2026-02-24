@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaCalendarAlt } from 'react-icons/fa';
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgvzkepb';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -28,9 +30,12 @@ export default function Contact() {
     setStatus('Sending your message...');
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify(formData),
       });
 
@@ -39,7 +44,7 @@ export default function Contact() {
         throw new Error(data?.error || 'Failed to send message.');
       }
 
-      setStatus(data?.message || 'Thank you for reaching out! I will get back to you soon.');
+      setStatus('Thank you! Your message has been sent successfully.');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       setStatus(error.message || 'Unable to send message right now. Please try again later.');
