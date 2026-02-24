@@ -57,14 +57,26 @@ export default function Experience() {
     {
       role: 'AI & Full-Stack Development Intern',
       company: 'Meraki Matrix Pvt Limited',
-      duration: 'Jun 2025 – Oct 2025',
+      duration: 'Jun 2, 2025 – Oct 24, 2025',
       type: 'Internship',
       icon: '🎨',
-      description: 'Contributed to AI-driven and full-stack projects across frontend experiences, backend APIs, and analytics-focused features.',
-      skills: ['React.js', 'Node.js', 'MongoDB', 'AI Integration'],
+      description: 'Completed a hybrid internship in AI and Full-Stack Development, delivering full-stack features and a predictive analytics dashboard.',
+      skills: ['React.js', 'Node.js', 'MongoDB', 'Python', 'AI Integration'],
       bgColor: 'from-purple-50 to-pink-50',
       borderColor: 'border-purple-200',
       textColor: 'text-purple-900'
+    },
+    {
+      role: 'Operations & Business Analytics Intern',
+      company: 'Aura Active',
+      duration: 'Mar 4, 2025 – May 30, 2025',
+      type: 'Internship',
+      icon: '📊',
+      description: 'Supported inventory, forecasting, and dashboard reporting with analytics-focused operations improvements.',
+      skills: ['Excel', 'Google Workspace', 'Forecasting', 'Data Visualization'],
+      bgColor: 'from-amber-50 to-yellow-50',
+      borderColor: 'border-amber-200',
+      textColor: 'text-amber-900'
     }
   ];
 
