@@ -27,14 +27,25 @@ export default function Contact() {
     setIsSubmitting(true);
     setStatus('Sending your message...');
 
-    // Simulate API call delay
-    setTimeout(() => {
-      setStatus(
-        'Thank you for reaching out! I will get back to you within 24 hours.'
-      );
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.error || 'Failed to send message.');
+      }
+
+      setStatus(data?.message || 'Thank you for reaching out! I will get back to you soon.');
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      setStatus(error.message || 'Unable to send message right now. Please try again later.');
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   const contactMethods = [
@@ -256,9 +267,11 @@ export default function Contact() {
                 {status && (
                   <div
                     className={`text-center p-4 rounded-xl font-semibold ${
-                      status.includes('Thank you')
+                      status.toLowerCase().includes('thank')
                         ? 'bg-green-50 text-green-800 border border-green-200'
-                        : 'bg-blue-50 text-blue-800 border border-blue-200'
+                        : status.toLowerCase().includes('sending')
+                        ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                        : 'bg-red-50 text-red-800 border border-red-200'
                     }`}
                   >
                     {status}
