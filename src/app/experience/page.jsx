@@ -24,18 +24,36 @@ export default function Experience() {
     {
       role: 'Social Media Manager',
       company: 'Rising Tech Solutions Pvt Limited',
-      duration: 'Aug 2025 – Feb 2026',
+      duration: '2025 – 2026',
       type: 'Part-time',
       description:
-        'Managed social media campaigns, content planning, and analytics for multiple brands before transitioning to full-time founder responsibilities.',
+        'Managing social media campaigns, content planning, and analytics for multiple brands. Increased engagement by 40%+ through strategic content and SEO-driven campaigns.',
       responsibilities: [
-        'Built and executed multi-platform content strategies',
-        'Planned editorial calendars and campaign rollouts',
-        'Tracked KPI performance and optimized engagement',
-        'Coordinated with design teams for visual-first campaigns',
-        'Improved consistency in posting cadence and brand messaging',
+        'Developed and executed comprehensive social media strategies across platforms',
+        'Created engaging content calendars aligned with brand voice and objectives',
+        'Analyzed performance metrics and optimized campaigns for maximum ROI',
+        'Collaborated with design and marketing teams to produce visually appealing content',
+        'Managed influencer partnerships and brand collaborations',
+        'Monitored brand mentions and online reputation',
+        'Planned paid ad campaigns to increase reach and engagement',
       ],
-      skills: ['Social Media Strategy', 'Content Planning', 'Analytics', 'SEO', 'Brand Messaging'],
+      skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO', 'Brand Management', 'Advertising'],
+    },
+    {
+      role: 'Social Media Manager',
+      company: 'SHIELDPRO',
+      duration: '2025 – 2026',
+      type: 'Part-time',
+      description:
+        'Managed social media presence and campaign operations for brand visibility, audience engagement, and lead support.',
+      responsibilities: [
+        'Planned and executed social media campaigns across major platforms',
+        'Produced consistent content calendars aligned with brand positioning',
+        'Monitored campaign performance and adjusted strategy from analytics',
+        'Coordinated with design and marketing contributors for campaign assets',
+        'Strengthened reach, engagement, and response quality across channels',
+      ],
+      skills: ['Social Media Strategy', 'Content Planning', 'Analytics', 'Brand Awareness', 'Campaign Management'],
     },
     {
       role: 'AI & Full-Stack Development Intern',
@@ -211,7 +229,7 @@ export default function Experience() {
         >
           <div className="grid md:grid-cols-5 gap-8 text-center">
             <div>
-              <div className="text-4xl font-black text-amber-400 mb-2">6+</div>
+              <div className="text-4xl font-black text-amber-400 mb-2">7+</div>
               <div className="text-gray-300 font-semibold">Professional Roles</div>
             </div>
             <div>

@@ -21,14 +21,26 @@ export default function Experience() {
     {
       role: 'Social Media Manager',
       company: 'Rising Tech Solutions Pvt Limited',
-      duration: 'Aug 2025 – Feb 2026',
+      duration: '2025 – 2026',
       type: 'Part-time',
-      icon: '📱',
-      description: 'Led social media campaigns, content planning, and analytics. Role concluded in February 2026 after transition to full-time founder responsibilities.',
-      skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO'],
+      icon: '📈',
+      description: 'Managing social media campaigns, content planning, and analytics for multiple brands with measurable growth outcomes.',
+      skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO', 'Advertising'],
       bgColor: 'from-blue-50 to-cyan-50',
       borderColor: 'border-blue-200',
       textColor: 'text-blue-900'
+    },
+    {
+      role: 'Social Media Manager',
+      company: 'SHIELDPRO',
+      duration: '2025 – 2026',
+      type: 'Part-time',
+      icon: '🛡️',
+      description: 'Managed social media communication and campaign execution to improve awareness, reach, and lead quality.',
+      skills: ['Campaign Management', 'Content Planning', 'Analytics', 'Brand Awareness'],
+      bgColor: 'from-indigo-50 to-blue-50',
+      borderColor: 'border-indigo-200',
+      textColor: 'text-indigo-900'
     },
     {
       role: 'Full Stack Development Intern',

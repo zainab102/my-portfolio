@@ -88,14 +88,12 @@ export default function AboutPage() {
               </p>
 
               <div className="pt-2">
-                <a
-                  href="https://github.com/zainab102/my-portfolio/tree/main/Portfolio"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/documents"
                   className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border-2 border-gray-300 hover:border-gray-400 font-bold rounded-xl transition-all duration-300 transform hover:scale-105 light-shadow-lg hover:shadow-xl"
                 >
                   Open Documentation Folder
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

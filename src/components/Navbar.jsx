@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
+  { id: 'documents', label: 'Documents' },
   { id: 'skills', label: 'Skills' },
   { id: 'blogs', label: 'Blogs' },
   { id: 'contact', label: 'Contact' },
@@ -43,6 +44,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (pathname === '/blogs') setActive('blogs');
+    if (pathname === '/documents') setActive('documents');
   }, [pathname]);
 
   const handleClick = (e, id) => {
@@ -51,6 +53,10 @@ export default function Navbar() {
 
     if (id === 'hero') {
       router.push('/');
+      return;
+    }
+    if (id === 'documents') {
+      router.push('/documents');
       return;
     }
 
