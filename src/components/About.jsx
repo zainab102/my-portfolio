@@ -80,6 +80,10 @@ export default function About() {
                   <span className="font-semibold text-purple-700"> storytelling</span> — shaping me into someone 
                   who never stops learning, evolving, and sharing.
                 </p>
+
+                <p className="text-gray-700">
+                  I currently serve as <span className="font-semibold text-amber-700">CEO & Founder of Zentrix Media by ZT</span>, where I focus on growth strategy, digital execution, and client outcomes.
+                </p>
                 
                 <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-200/50">
                   <p className="text-purple-900 font-semibold text-xl italic">
@@ -111,15 +115,25 @@ export default function About() {
 
               {/* View More Button */}
               <div className="mt-8 text-center">
-                <Link 
-                  href="/about"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 light-shadow-lg hover:shadow-xl"
-                >
-                  <span>View More About Me</span>
-                  <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Link>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <Link 
+                    href="/about"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 light-shadow-lg hover:shadow-xl"
+                  >
+                    <span>View More About Me</span>
+                    <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                  <a
+                    href="https://github.com/zainab102/my-portfolio/tree/main/Portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-8 py-4 bg-white text-gray-800 border-2 border-gray-300 hover:border-gray-400 font-bold rounded-xl transition-all duration-300 transform hover:scale-105 light-shadow-lg hover:shadow-xl"
+                  >
+                    View Documentation
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

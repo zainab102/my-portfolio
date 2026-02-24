@@ -5,14 +5,32 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function Projects() {
+  const githubSearchLink = (query) =>
+    `https://github.com/search?q=user%3Azainab102+${encodeURIComponent(query)}&type=repositories`;
+
   // Show only featured projects on homepage
   const featuredProjects = [
     {
+      title: 'Personal Portfolio Website',
+      description: 'Developer portfolio with sections for experience, skills, projects, contact, and a full documentation archive.',
+      category: 'Full Stack',
+      tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
+      githubLink: 'https://github.com/zainab102/my-portfolio',
+      demoLink: 'https://my-portfolio-xi-lilac-23.vercel.app/',
+      status: 'Completed',
+      image: 'personal-portfolio',
+      bgColor: 'from-orange-50 to-rose-50',
+      borderColor: 'border-orange-200',
+      textColor: 'text-orange-900',
+      icon: '🌐'
+    },
+    {
       title: 'Netflix/YouTube Clone',
-      description: 'Modern streaming interface clone with responsive design, user authentication, and video playback features mimicking popular streaming platforms.',
+      description: 'Modern streaming interface clone with responsive design and dynamic content rendering.',
       category: 'Web Development',
-      tech: ['React', 'CSS3', 'REST API', 'Firebase'],
-      link: '#',
+      tech: ['React', 'CSS3', 'JavaScript', 'Firebase'],
+      githubLink: githubSearchLink('netflix youtube clone react'),
+      demoLink: null,
       status: 'Completed',
       image: 'streaming-platform',
       bgColor: 'from-red-50 to-pink-50',
@@ -21,12 +39,13 @@ export default function Projects() {
       icon: '📺'
     },
     {
-      title: 'AI-Powered Chatbot',
-      description: 'Intelligent conversational agent using large language models with natural language processing and context-aware responses.',
+      title: 'AI-Powered Resume Feedback Generator',
+      description: 'LLM-based application that analyzes resumes and provides structured, practical feedback.',
       category: 'AI & ML',
       tech: ['Python', 'OpenAI API', 'NLP', 'Flask'],
-      link: '#',
-      status: 'In Progress',
+      githubLink: githubSearchLink('resume feedback generator llm'),
+      demoLink: null,
+      status: 'Completed',
       image: 'ai-chatbot',
       bgColor: 'from-purple-50 to-indigo-50',
       borderColor: 'border-purple-200',
@@ -34,11 +53,26 @@ export default function Projects() {
       icon: '🤖'
     },
     {
+      title: 'Conversational AI Agent',
+      description: 'Conversational assistant prototype with context-aware responses and prompt-based task handling.',
+      category: 'AI & ML',
+      tech: ['Python', 'NLP', 'LLMs', 'APIs'],
+      githubLink: githubSearchLink('conversational ai agent chatbot'),
+      demoLink: null,
+      status: 'In Progress',
+      image: 'conversational-ai-agent',
+      bgColor: 'from-amber-50 to-yellow-50',
+      borderColor: 'border-amber-200',
+      textColor: 'text-amber-900',
+      icon: '🧠'
+    },
+    {
       title: 'Interactive Sales Dashboard',
-      description: 'Comprehensive data visualization dashboard with real-time analytics, interactive charts, and business intelligence insights.',
+      description: 'Data visualization dashboard with analytics charts and business intelligence insights.',
       category: 'Data Analytics',
       tech: ['Python', 'Dash', 'Plotly', 'Pandas'],
-      link: '#',
+      githubLink: githubSearchLink('sales dashboard plotly pandas'),
+      demoLink: null,
       status: 'Completed',
       image: 'sales-dashboard',
       bgColor: 'from-blue-50 to-cyan-50',
@@ -47,47 +81,22 @@ export default function Projects() {
       icon: '📊'
     },
     {
-      title: 'Smart Fitness Tracker',
-      description: 'Comprehensive fitness application with workout planning, progress tracking, nutrition monitoring, and personalized recommendations.',
-      category: 'Mobile App',
-      tech: ['React Native', 'Node.js', 'MongoDB', 'APIs'],
-      link: '#',
-      status: 'In Progress',
-      image: 'fitness-app',
+      title: 'Expense & Spending Tracker',
+      description: 'Personal finance tracker for budgeting, categorization, and trend visualization.',
+      category: 'Data Analytics',
+      tech: ['Python', 'Pandas', 'Matplotlib', 'SQLite'],
+      githubLink: githubSearchLink('expense spending tracker python'),
+      demoLink: null,
+      status: 'Completed',
+      image: 'expense-tracker',
       bgColor: 'from-green-50 to-emerald-50',
       borderColor: 'border-green-200',
       textColor: 'text-green-900',
-      icon: '💪'
-    },
-    {
-      title: 'Smart Voice Assistant',
-      description: 'Voice-controlled AI assistant with speech recognition, natural language understanding, and smart home integration capabilities.',
-      category: 'AI & IoT',
-      tech: ['Python', 'Speech Recognition', 'IoT', 'APIs'],
-      link: '#',
-      status: 'Planning',
-      image: 'voice-assistant',
-      bgColor: 'from-amber-50 to-yellow-50',
-      borderColor: 'border-amber-200',
-      textColor: 'text-amber-900',
-      icon: '🎙️'
-    },
-    {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with payment integration, inventory management, and modern shopping experience.',
-      category: 'Full Stack',
-      tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Tailwind'],
-      link: '#',
-      status: 'In Progress',
-      image: 'ecommerce-platform',
-      bgColor: 'from-orange-50 to-rose-50',
-      borderColor: 'border-orange-200',
-      textColor: 'text-orange-900',
-      icon: '🛒'
+      icon: '💰'
     }
   ];
 
-  const categories = ['All', 'Web Development', 'AI & ML', 'Data Analytics', 'Mobile App', 'Full Stack'];
+  const categories = ['All', 'Web Development', 'AI & ML', 'Data Analytics', 'Full Stack'];
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filteredProjects = activeCategory === 'All' 
@@ -263,12 +272,28 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* View Project Button */}
-                    {project.link !== '#' && (
-                      <button className="w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105">
-                        View Project →
-                      </button>
-                    )}
+                    <div className="mt-2 grid grid-cols-1 gap-2">
+                      {project.githubLink && (
+                        <a
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 text-center"
+                        >
+                          View on GitHub
+                        </a>
+                      )}
+                      {project.demoLink && (
+                        <a
+                          href={project.demoLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 text-center"
+                        >
+                          Open Live Demo
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

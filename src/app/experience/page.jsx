@@ -6,112 +6,101 @@ import Link from 'next/link';
 export default function Experience() {
   const experiences = [
     {
+      role: 'CEO & Founder',
+      company: 'Zentrix Media by ZT',
+      duration: 'Feb 2026 – Present',
+      type: 'Founder',
+      description:
+        'Leading a media and growth-focused company, overseeing business strategy, client partnerships, and execution across digital channels.',
+      responsibilities: [
+        'Define company vision, service offerings, and quarterly growth roadmap',
+        'Lead client acquisition, communication, and account strategy',
+        'Oversee delivery pipelines across branding, content, and performance marketing',
+        'Manage team workflows, quality assurance, and reporting standards',
+        'Scale operations through repeatable playbooks and automation',
+      ],
+      skills: ['Leadership', 'Business Strategy', 'Client Management', 'Operations', 'Growth Marketing'],
+    },
+    {
       role: 'Social Media Manager',
       company: 'Rising Tech Solutions Pvt Limited',
-      duration: '2025 – Present',
+      duration: 'Aug 2025 – Feb 2026',
       type: 'Part-time',
-      description: 'Managing social media campaigns, content planning, and analytics for multiple brands. Increased engagement by 40%+ through strategic content and SEO-driven campaigns.',
+      description:
+        'Managed social media campaigns, content planning, and analytics for multiple brands before transitioning to full-time founder responsibilities.',
       responsibilities: [
-        'Developed and executed comprehensive social media strategies across platforms',
-        'Created engaging content calendars aligned with brand voice and objectives',
-        'Analyzed performance metrics and optimized campaigns for maximum ROI',
-        'Collaborated with design and marketing teams to produce visually appealing content',
-        'Managed influencer partnerships and brand collaborations',
-        'Monitored brand mentions and online reputation',
-        'Planned paid ad campaigns to increase reach and engagement'
+        'Built and executed multi-platform content strategies',
+        'Planned editorial calendars and campaign rollouts',
+        'Tracked KPI performance and optimized engagement',
+        'Coordinated with design teams for visual-first campaigns',
+        'Improved consistency in posting cadence and brand messaging',
       ],
-      skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO', 'Brand Management', 'Advertising']
+      skills: ['Social Media Strategy', 'Content Planning', 'Analytics', 'SEO', 'Brand Messaging'],
     },
     {
-      role: 'Social Media Manager',
-      company: 'SHIELDPRO',
-      duration: '2025 – Present',
-      type: 'Part-time',
-      description: 'Managing social media presence for an appliance warranty company, focusing on customer engagement, lead generation, and brand awareness.',
+      role: 'AI & Full-Stack Development Intern',
+      company: 'Meraki Matrix Pvt Limited',
+      duration: 'Jun 2025 – Oct 2025',
+      type: 'Internship',
+      description:
+        'Contributed to full-stack and AI-powered projects, combining frontend implementation with backend integrations and analytics.',
       responsibilities: [
-        'Developed brand awareness campaigns for appliance warranty services',
-        'Created educational content about product protection and warranties',
-        'Managed customer service inquiries through social media channels',
-        'Implemented lead generation strategies through social platforms',
-        'Analyzed metrics and optimized campaigns for higher conversions'
+        'Built UI components and interactive modules in React.js',
+        'Implemented backend API flows with Node.js and MongoDB',
+        'Supported AI-assisted features and prediction-oriented dashboards',
+        'Collaborated across design and engineering to improve usability',
+        'Maintained project documentation and sprint deliverables',
       ],
-      skills: ['Customer Service', 'Lead Generation', 'Educational Content', 'Brand Awareness', 'Analytics']
-    },
-    {
-      role: 'Social Media Manager',
-      company: 'rent.outfits_',
-      duration: '2025 – Present',
-      type: 'Full-time',
-      description: 'Managing operations and social media for a fashion rental platform, overseeing inventory, marketing, and customer relations.',
-      responsibilities: [
-        'Coordinated rental inventory and logistics operations',
-        'Managed customer relationships and booking systems',
-        'Developed marketing and social media strategies for fashion rental services',
-        'Optimized operational workflows for better efficiency',
-        'Engaged with customers to improve experience and retention'
-      ],
-      skills: ['Operations Management', 'Customer Relations', 'Inventory Management', 'Marketing', 'Social Media']
+      skills: ['React.js', 'Node.js', 'MongoDB', 'AI Integration', 'UI/UX Collaboration'],
     },
     {
       role: 'Full Stack Development Intern',
       company: 'Pursue Today',
-      duration: '2025',
+      duration: 'Jun 2025 – Aug 2025',
       type: 'Internship',
-      description: 'Developed interactive web apps integrating AI-powered features. Collaborated with design and marketing teams to optimize UX for campaign landing pages.',
+      description:
+        'Developed full-stack web applications and participated in deployment workflows with AI-centric feature integrations.',
       responsibilities: [
-        'Built responsive web applications using modern frontend frameworks',
-        'Integrated AI-powered features to enhance user experience',
-        'Collaborated with cross-functional teams on UX optimization',
-        'Developed and maintained campaign landing pages',
-        'Implemented best practices for web performance and SEO'
+        'Built web features with JavaScript and React',
+        'Implemented backend logic and service integration',
+        'Supported CI/CD and deployment automation tasks',
+        'Worked on LLM-based and generative AI experiments',
+        'Collaborated in agile planning and sprint execution',
       ],
-      skills: ['React.js', 'Node.js', 'AI Integration', 'UX Design', 'Web Performance']
+      skills: ['JavaScript', 'React.js', 'Node.js', 'Python', 'CI/CD'],
     },
     {
-      role: 'UX/UI Design Intern',
-      company: 'Meraki Matrix Pvt Limited',
-      duration: '2025',
+      role: 'Operations & Business Analytics Intern',
+      company: 'The Cartel Foods (Gloria Jean’s Coffee)',
+      duration: 'Jan 2024 – Feb 2025',
       type: 'Internship',
-      description: 'Conducted user research, wireframing, prototyping, and collaborated with developers for seamless design integration.',
+      description:
+        'Supported data-backed operational decisions through inventory, supplier, and sales analysis with reporting dashboards.',
       responsibilities: [
-        'Conducted comprehensive user research and usability testing',
-        'Created wireframes, prototypes, and high-fidelity designs',
-        'Collaborated with development teams for design implementation',
-        'Developed design systems and style guides',
-        'Optimized user journeys and interface designs'
+        'Tracked inventory movement and operational efficiency',
+        'Analyzed sales trends and forecasted demand',
+        'Supported supplier evaluation and process improvement',
+        'Created dashboards and reports for decision support',
+        'Improved consistency of operational data records',
       ],
-      skills: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems', 'Usability Testing']
-    },
-    {
-      role: 'Digital Marketing Associate',
-      company: 'GrowBiz & BizSkills, Forever Living Products',
-      duration: '2021 – 2024',
-      type: 'Part-time',
-      description: 'Executed social media campaigns, managed influencer partnerships, and optimized content performance using analytics tools.',
-      responsibilities: [
-        'Executed multi-platform digital marketing campaigns',
-        'Managed relationships with micro and macro influencers',
-        'Analyzed campaign performance using Google Analytics and social media insights',
-        'Created compelling marketing content and copy',
-        'Optimized conversion funnels and landing pages'
-      ],
-      skills: ['Digital Marketing', 'Influencer Marketing', 'Google Analytics', 'Content Marketing', 'Conversion Optimization']
+      skills: ['Operations Analysis', 'Excel', 'Google Sheets', 'Reporting', 'Forecasting'],
     },
     {
       role: 'Website Owner & Blogger',
       company: 'ZainabEdu.com',
       duration: '2024 – Present',
       type: 'Personal Project',
-      description: 'Managed a mental health and fitness blog, using analytics to optimize content and engagement.',
+      description:
+        'Manage and publish content focused on mental health and fitness, supported by SEO and analytics-based content strategy.',
       responsibilities: [
-        'Created and published regular content on mental health and fitness topics',
-        'Implemented SEO strategies to increase organic traffic',
-        'Engaged with community through comments and social media',
-        'Analyzed website performance and user behavior',
-        'Monetized content through affiliate marketing and partnerships'
+        'Write and publish educational blog content',
+        'Apply SEO practices for discoverability and growth',
+        'Monitor traffic trends and engagement behavior',
+        'Refine content strategy using analytics insights',
+        'Maintain site updates and content calendar',
       ],
-      skills: ['Content Writing', 'SEO', 'WordPress', 'Google Analytics', 'Affiliate Marketing']
-    }
+      skills: ['Content Writing', 'SEO', 'WordPress', 'Analytics', 'Content Strategy'],
+    },
   ];
 
   return (
@@ -222,11 +211,11 @@ export default function Experience() {
         >
           <div className="grid md:grid-cols-5 gap-8 text-center">
             <div>
-              <div className="text-4xl font-black text-amber-400 mb-2">7+</div>
+              <div className="text-4xl font-black text-amber-400 mb-2">6+</div>
               <div className="text-gray-300 font-semibold">Professional Roles</div>
             </div>
             <div>
-              <div className="text-4xl font-black text-rose-400 mb-2">3+</div>
+              <div className="text-4xl font-black text-rose-400 mb-2">4+</div>
               <div className="text-gray-300 font-semibold">Years Experience</div>
             </div>
             <div>

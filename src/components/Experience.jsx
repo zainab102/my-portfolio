@@ -7,12 +7,24 @@ export default function Experience() {
   // Only show 3-4 most recent/important experiences on homepage
   const featuredExperiences = [
     {
+      role: 'CEO & Founder',
+      company: 'Zentrix Media by ZT',
+      duration: 'Feb 2026 – Present',
+      type: 'Founder',
+      icon: '🚀',
+      description: 'Leading strategy, client delivery, and growth across digital media, branding, and tech-driven marketing solutions.',
+      skills: ['Business Leadership', 'Growth Strategy', 'Client Management', 'Brand Positioning'],
+      bgColor: 'from-amber-50 to-yellow-50',
+      borderColor: 'border-amber-200',
+      textColor: 'text-amber-900'
+    },
+    {
       role: 'Social Media Manager',
       company: 'Rising Tech Solutions Pvt Limited',
-      duration: '2025',
-      type: 'Full-time',
+      duration: 'Aug 2025 – Feb 2026',
+      type: 'Part-time',
       icon: '📱',
-      description: 'Managing social media campaigns, content planning, and analytics for multiple brands. Increased engagement by 40%+ through strategic content and SEO-driven campaigns.',
+      description: 'Led social media campaigns, content planning, and analytics. Role concluded in February 2026 after transition to full-time founder responsibilities.',
       skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO'],
       bgColor: 'from-blue-50 to-cyan-50',
       borderColor: 'border-blue-200',
@@ -31,13 +43,13 @@ export default function Experience() {
       textColor: 'text-green-900'
     },
     {
-      role: 'UX/UI Design Intern',
+      role: 'AI & Full-Stack Development Intern',
       company: 'Meraki Matrix Pvt Limited',
-      duration: '2024',
+      duration: 'Jun 2025 – Oct 2025',
       type: 'Internship',
       icon: '🎨',
-      description: 'Conducted user research, wireframing, prototyping, and collaborated with developers for seamless design integration.',
-      skills: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
+      description: 'Contributed to AI-driven and full-stack projects across frontend experiences, backend APIs, and analytics-focused features.',
+      skills: ['React.js', 'Node.js', 'MongoDB', 'AI Integration'],
       bgColor: 'from-purple-50 to-pink-50',
       borderColor: 'border-purple-200',
       textColor: 'text-purple-900'
@@ -178,13 +190,13 @@ export default function Experience() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-2xl border border-amber-200">
                 <div className="text-2xl mb-2">📊</div>
-                <h4 className="font-bold text-amber-900">Social Media Manager</h4>
-                <p className="text-amber-800 text-sm">SHIELDPRO</p>
+                <h4 className="font-bold text-amber-900">Operations & Business Analytics Intern</h4>
+                <p className="text-amber-800 text-sm">The Cartel Foods</p>
               </div>
               <div className="bg-gradient-to-r from-rose-50 to-pink-50 p-6 rounded-2xl border border-rose-200">
                 <div className="text-2xl mb-2">👗</div>
-                <h4 className="font-bold text-rose-900">Operations Manager</h4>
-                <p className="text-rose-800 text-sm">rent.outfits_</p>
+                <h4 className="font-bold text-rose-900">Operations & Business Analytics Intern</h4>
+                <p className="text-rose-800 text-sm">Aura Active</p>
               </div>
               <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-200">
                 <div className="text-2xl mb-2">✍️</div>
@@ -209,7 +221,7 @@ export default function Experience() {
               <div className="text-gray-300 font-semibold">Professional Roles</div>
             </div>
             <div>
-              <div className="text-4xl font-black text-rose-400 mb-2">3+</div>
+              <div className="text-4xl font-black text-rose-400 mb-2">4+</div>
               <div className="text-gray-300 font-semibold">Years Experience</div>
             </div>
             <div>

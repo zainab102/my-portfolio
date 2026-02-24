@@ -5,8 +5,24 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function Projects() {
+  const githubSearchLink = (query) =>
+    `https://github.com/search?q=user%3Azainab102+${encodeURIComponent(query)}&type=repositories`;
+
   // Array of project objects with details, including background gradients and colors for styling
   const projects = [
+    {
+      title: 'Personal Portfolio Website',
+      description: 'Responsive portfolio website with project showcases, experience timeline, and documentation archive.',
+      category: 'Web Development',
+      tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
+      githubLink: 'https://github.com/zainab102/my-portfolio',
+      demoLink: 'https://my-portfolio-xi-lilac-23.vercel.app/',
+      status: 'Completed',
+      bgColor: 'from-orange-50 to-rose-50',
+      borderColor: 'border-orange-200',
+      textColor: 'text-orange-900',
+      icon: '🌐',
+    },
     // Web Development Projects
     {
       title: 'Netflix Clone',
@@ -292,10 +308,17 @@ export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   // Filter projects based on active category or show all if 'All' is selected
+  const enhancedProjects = projects.map((project) => ({
+    ...project,
+    githubLink:
+      project.githubLink ||
+      (project.link && project.link !== '#' ? project.link : githubSearchLink(project.title)),
+  }));
+
   const filteredProjects =
     activeCategory === 'All'
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      ? enhancedProjects
+      : enhancedProjects.filter((p) => p.category === activeCategory);
 
   // Project statistics shown as cards
   const projectStats = [
@@ -505,15 +528,28 @@ export default function Projects() {
                     </span>
                   </div>
 
-                  {/* View Project Button */}
-                  {p.link && p.link !== '#' && (
-                    <Link
-                      href={p.link}
-                      className="mt-4 w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-bold rounded-xl text-center transition-all duration-300 transform hover:scale-105"
-                    >
-                      View Project →
-                    </Link>
-                  )}
+                  <div className="mt-4 grid grid-cols-1 gap-2">
+                    {p.githubLink && (
+                      <a
+                        href={p.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-bold rounded-xl text-center transition-all duration-300 transform hover:scale-105"
+                      >
+                        View on GitHub
+                      </a>
+                    )}
+                    {p.demoLink && (
+                      <a
+                        href={p.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold rounded-xl text-center transition-all duration-300 transform hover:scale-105"
+                      >
+                        Open Live Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

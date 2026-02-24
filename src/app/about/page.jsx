@@ -76,7 +76,7 @@ export default function AboutPage() {
               </ul>
 
               <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                Along the way, I’ve worked with cool software houses like <strong>Meraki Matrix, Pursue Today, Diginet, and Insiders</strong>, turning ideas into real projects — and picking up lessons (and fun stories) along the way.
+                I currently serve as <strong>CEO & Founder of Zentrix Media by ZT</strong>. Before this, I worked with teams like <strong>Meraki Matrix and Pursue Today</strong>, building practical products and delivery systems across web and AI projects.
               </p>
 
               <p className="text-gray-700 text-lg leading-relaxed mb-4">
@@ -86,6 +86,17 @@ export default function AboutPage() {
               <p className="text-gray-700 text-lg leading-relaxed">
                 When I’m not coding or brainstorming, I explore AI tools, graphic design, or content writing — anything that blends creativity with tech. My goal? To keep learning, growing, and making an impact while inspiring others along the way 😉
               </p>
+
+              <div className="pt-2">
+                <a
+                  href="https://github.com/zainab102/my-portfolio/tree/main/Portfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border-2 border-gray-300 hover:border-gray-400 font-bold rounded-xl transition-all duration-300 transform hover:scale-105 light-shadow-lg hover:shadow-xl"
+                >
+                  Open Documentation Folder
+                </a>
+              </div>
             </div>
           </motion.div>
 

@@ -156,8 +156,11 @@ export default function Hero() {
               </div>
               <div className="h-20 flex items-center justify-center lg:justify-start">
                 <motion.div key="title" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>
-                  <p className="text-3xl md:text-4xl font-bold text-gray-700 flex items-center select-none">
+                  <p className="text-2xl md:text-3xl font-bold text-gray-700 flex items-center select-none">
                     <FaCode className="mr-4 text-gray-600" size={40} /> Full Stack Developer
+                  </p>
+                  <p className="text-lg md:text-xl font-semibold text-gray-600 mt-2 select-none">
+                    CEO & Founder, Zentrix Media by ZT
                   </p>
                 </motion.div>
               </div>
@@ -204,7 +207,7 @@ export default function Hero() {
               {[
                 { icon: FaGithub, href: 'https://github.com/zainab102', label: 'GitHub', color: 'hover:text-gray-800', bgHover: 'hover:bg-gray-100' },
                 { icon: FaLinkedin, href: 'https://linkedin.com/in/zainab-22243b366', label: 'LinkedIn', color: 'hover:text-blue-700', bgHover: 'hover:bg-blue-50' },
-                { icon: FaEnvelope, href: 'mailto:zainab@example.com', label: 'Email', color: 'hover:text-red-700', bgHover: 'hover:bg-red-50' },
+                { icon: FaEnvelope, href: 'mailto:tariqzainab1190@gmail.com', label: 'Email', color: 'hover:text-red-700', bgHover: 'hover:bg-red-50' },
               ].map((social, index) => (
                 <a key={index} href={social.href} target={social.href.includes('mailto') ? undefined : '_blank'} rel={social.href.includes('mailto') ? undefined : 'noopener noreferrer'} className={`group flex items-center space-x-3 text-gray-700 ${social.color} transition-all duration-300 transform hover:scale-110`}>
                   <div className={`p-4 bg-white border border-gray-300 rounded-full group-hover:border-gray-400 ${social.bgHover} transition-all duration-300 shadow-sm group-hover:shadow-md`}>
