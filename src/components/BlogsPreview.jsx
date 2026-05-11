@@ -1,8 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const BlogsPreviewFloatDecor = dynamic(() => import('@/components/decor/BlogsPreviewFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function BlogsPreview({ limit = 3 }) {
   const [blogs, setBlogs] = useState([]);
@@ -17,7 +23,10 @@ export default function BlogsPreview({ limit = 3 }) {
         const res = await fetch(`/api/blogs?page=1&limit=${limit}`, { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed to load blogs');
         const data = await res.json();
-        if (!cancelled) setBlogs(Array.isArray(data.blogs) ? data.blogs : []);
+        if (!cancelled) {
+          const list = Array.isArray(data) ? data : data?.blogs;
+          setBlogs(Array.isArray(list) ? list : []);
+        }
       } catch (e) {
         if (!cancelled) {
           console.error(e);
@@ -45,27 +54,8 @@ export default function BlogsPreview({ limit = 3 }) {
   ];
 
   return (
-    <section id="blogs" className="py-24 px-6 md:px-12 bg-hero text-gray-900">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Section-specific butterflies */}
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={`blogs-butterfly-${i}`}
-            className="absolute animate-float opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 5}s`,
-              animationDuration: `${16 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+    <section id="blogs" className="relative py-24 px-6 md:px-12 bg-hero text-gray-900">
+      <BlogsPreviewFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -76,7 +66,7 @@ export default function BlogsPreview({ limit = 3 }) {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -89,15 +79,15 @@ export default function BlogsPreview({ limit = 3 }) {
 
         {/* Blog Stats Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           className="grid md:grid-cols-3 gap-6 mb-12"
         >
-          {blogCategories.map((category, index) => (
+          {blogCategories.map((category) => (
             <div
-              key={index}
+              key={category.name}
               className={`bg-gradient-to-r ${
                 category.color === 'blue' ? 'from-blue-50 to-indigo-50 border-blue-200' :
                 category.color === 'green' ? 'from-green-50 to-emerald-50 border-green-200' :
@@ -166,8 +156,8 @@ export default function BlogsPreview({ limit = 3 }) {
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-12">
               {blogs.map((blog, index) => (
                 <motion.article
-                  key={blog._id}
-                  initial={{ opacity: 0, y: 50 }}
+                  key={blog.slug || blog.id || `blog-${index}`}
+                  initial={false}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
@@ -219,7 +209,7 @@ export default function BlogsPreview({ limit = 3 }) {
                         <div className="flex flex-wrap gap-2 mb-4">
                           {blog.tags.slice(0, 3).map((tag, tagIndex) => (
                             <span
-                              key={tagIndex}
+                              key={`${blog.slug || blog.id || 'tag'}-${String(tag)}-${tagIndex}`}
                               className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold border border-gray-200 hover:bg-gray-200 transition-colors"
                             >
                               #{tag}
@@ -258,7 +248,7 @@ export default function BlogsPreview({ limit = 3 }) {
 
             {/* Blog Insights */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
@@ -294,7 +284,7 @@ export default function BlogsPreview({ limit = 3 }) {
 
             {/* Featured Blog Topics */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
@@ -309,9 +299,9 @@ export default function BlogsPreview({ limit = 3 }) {
                   { name: 'Web Development', icon: '🌐', posts: 6 },
                   { name: 'Python Programming', icon: '🐍', posts: 4 },
                   { name: 'Digital Marketing', icon: '📱', posts: 3 }
-                ].map((topic, index) => (
+                ].map((topic) => (
                   <div
-                    key={index}
+                    key={topic.name}
                     className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl px-4 py-3 hover:from-white hover:to-gray-50 hover:border-gray-300 transition-all duration-300 hover:scale-105 light-shadow group"
                   >
                     <div className="flex items-center space-x-2">
@@ -330,7 +320,7 @@ export default function BlogsPreview({ limit = 3 }) {
 
         {/* Newsletter Signup */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -352,7 +342,7 @@ export default function BlogsPreview({ limit = 3 }) {
 
         {/* View More Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           viewport={{ once: true }}

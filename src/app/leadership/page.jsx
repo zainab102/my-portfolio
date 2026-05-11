@@ -174,7 +174,7 @@ export default function Leadership() {
     <section id="leadership" className="bg-contact text-gray-900 py-24 px-6 md:px-12 relative">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -207,7 +207,7 @@ export default function Leadership() {
           {leadershipCategories[activeTab].items.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-300 light-shadow group"
@@ -267,7 +267,7 @@ export default function Leadership() {
 
         {/* Making a Difference */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-12"
@@ -292,7 +292,7 @@ export default function Leadership() {
 
 {/* Recent Recognition Section */}
 <motion.div
-  initial={{ opacity: 0, y: 30 }}
+  initial={false}
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6, delay: 1.0 }}
   viewport={{ once: true }}
@@ -329,7 +329,7 @@ export default function Leadership() {
     ].map((item, idx) => (
       <motion.div
         key={idx}
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: idx * 0.2 }}
         className={`flex items-center p-6 rounded-2xl bg-gradient-to-r ${item.gradient} text-white light-shadow-xl hover:scale-105 transition-transform`}
@@ -347,7 +347,7 @@ export default function Leadership() {
 
         {/* Back to Home Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mt-12"

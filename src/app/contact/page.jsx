@@ -1,9 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
+
+const ContactFloatDecor = dynamic(() => import('@/components/decor/ContactFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgvzkepb';
 
@@ -80,60 +86,12 @@ export default function Contact() {
     },
   ];
 
-  // Generate stable random positions and animation timings for butterflies only once
-  // outside of render to avoid hydration mismatches
-  // We do this by precomputing an array of butterfly styles once here
-  const butterflyStyles = [
-    {
-      left: '55.9%',
-      top: '86.3%',
-      animationDelay: '0s',
-      animationDuration: '21.08s',
-    },
-    {
-      left: '73.9%',
-      top: '33.0%',
-      animationDelay: '5s',
-      animationDuration: '18.43s',
-    },
-    {
-      left: '6.7%',
-      top: '43.1%',
-      animationDelay: '10s',
-      animationDuration: '20.17s',
-    },
-    {
-      left: '84.2%',
-      top: '84.1%',
-      animationDelay: '15s',
-      animationDuration: '18.92s',
-    },
-  ];
-
   return (
     <section
       id="contact"
       className="bg-contact text-gray-900 py-24 px-6 md:px-12 relative"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {butterflyStyles.map((style, i) => (
-          <div
-            key={`contact-butterfly-${i}`}
-            className="absolute animate-float opacity-30"
-            style={{
-              left: style.left,
-              top: style.top,
-              animationDelay: style.animationDelay,
-              animationDuration: style.animationDuration,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+      <ContactFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -144,7 +102,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -157,7 +115,7 @@ export default function Contact() {
 
         {/* Introduction */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -182,7 +140,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
@@ -321,7 +279,7 @@ export default function Contact() {
 
           {/* Contact Methods & Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
@@ -442,7 +400,7 @@ export default function Contact() {
 
           {/* Back to Home Button */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center mt-12"

@@ -1,7 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+
+const CertificationsPageFloatDecor = dynamic(() => import('@/components/decor/CertificationsPageFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function CertificationsPage() {
   const allCertifications = [
@@ -59,21 +65,7 @@ export default function CertificationsPage() {
   return (
     <section id="certifications" className="bg-skills text-gray-900 py-24 px-6 md:px-12 relative overflow-hidden">
 
-      {/* Background butterflies */}
-      {[...Array(7)].map((_, i) => (
-        <div
-          key={`butterfly-${i}`}
-          className="absolute animate-float opacity-30"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${i * 2}s`,
-            animationDuration: `${15 + Math.random() * 8}s`,
-          }}
-        >
-          <div className="text-lg animate-wing-flutter filter drop-shadow-sm">🦋</div>
-        </div>
-      ))}
+      <CertificationsPageFloatDecor />
 
       {/* Blob Background */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -84,7 +76,7 @@ export default function CertificationsPage() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -97,7 +89,7 @@ export default function CertificationsPage() {
 
         {/* Stats Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -137,7 +129,7 @@ export default function CertificationsPage() {
           {allCertifications.map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.3 }}
               viewport={{ once: true }}
@@ -200,7 +192,7 @@ export default function CertificationsPage() {
 
         {/* Skills Gained Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -240,7 +232,7 @@ export default function CertificationsPage() {
 
         {/* Certification Timeline */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -270,7 +262,7 @@ export default function CertificationsPage() {
 
         {/* Back to Home Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mt-12"

@@ -1,107 +1,112 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+const ExperienceFloatDecor = dynamic(() => import('@/components/decor/ExperienceFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
+
 export default function Experience() {
-  // Only show 3-4 most recent/important experiences on homepage
   const featuredExperiences = [
     {
-      role: 'CEO & Founder',
-      company: 'Zentrix Media by ZT',
-      duration: 'Feb 2026 – Present',
-      type: 'Founder',
-      icon: '🚀',
-      description: 'Leading strategy, client delivery, and growth across digital media, branding, and tech-driven marketing solutions.',
-      skills: ['Business Leadership', 'Growth Strategy', 'Client Management', 'Brand Positioning'],
-      bgColor: 'from-amber-50 to-yellow-50',
-      borderColor: 'border-amber-200',
-      textColor: 'text-amber-900'
-    },
-    {
       role: 'Social Media Manager',
-      company: 'Rising Tech Solutions Pvt Limited',
-      duration: '2025 – 2026',
+      company: 'Rising Tech Solutions',
+      duration: 'August 2025 – Present',
       type: 'Part-time',
       icon: '📈',
-      description: 'Managing social media campaigns, content planning, and analytics for multiple brands with measurable growth outcomes.',
-      skills: ['Social Media Strategy', 'Content Creation', 'Analytics', 'SEO', 'Advertising'],
+      description:
+        'Led multi-platform strategies on LinkedIn, Instagram, and Facebook; planned and scheduled content from audience insights; monitored KPIs and partnered internally to sharpen campaigns and digital presence.',
+      skills: ['LinkedIn', 'Instagram', 'Facebook', 'Content Strategy', 'KPIs & Analytics'],
       bgColor: 'from-blue-50 to-cyan-50',
       borderColor: 'border-blue-200',
-      textColor: 'text-blue-900'
+      textColor: 'text-blue-900',
     },
     {
       role: 'Social Media Manager',
-      company: 'SHIELDPRO',
-      duration: '2025 – 2026',
+      company: 'Shield Pro Home Warranty (US)',
+      duration: 'August 2025 – Present',
       type: 'Part-time',
       icon: '🛡️',
-      description: 'Managed social media communication and campaign execution to improve awareness, reach, and lead quality.',
-      skills: ['Campaign Management', 'Content Planning', 'Analytics', 'Brand Awareness'],
+      description:
+        'Runs social strategy for a US-based home warranty brand—content calendars, engagement, and campaign tuning aligned with marketing goals.',
+      skills: ['Social Media Strategy', 'Content Planning', 'Campaign Optimization', 'Analytics'],
       bgColor: 'from-indigo-50 to-blue-50',
       borderColor: 'border-indigo-200',
-      textColor: 'text-indigo-900'
+      textColor: 'text-indigo-900',
+    },
+    {
+      role: 'Social Media Manager',
+      company: 'Tidy Cleaning Champs (US)',
+      duration: 'December 2025 – Present',
+      type: 'Part-time',
+      icon: '🧹',
+      description:
+        'Manages social channels for a US cleaning services brand; drives awareness and leads through consistent, insight-led content and reporting.',
+      skills: ['Multi-platform Social', 'Brand Voice', 'Scheduling', 'Performance Reporting'],
+      bgColor: 'from-teal-50 to-cyan-50',
+      borderColor: 'border-teal-200',
+      textColor: 'text-teal-900',
+    },
+    {
+      role: 'AI & Full-Stack Development Intern (Hybrid)',
+      company: 'Meraki Matrix (Pvt.) Ltd.',
+      duration: 'June 2025 – October 2025',
+      type: 'Internship',
+      icon: '🎨',
+      description:
+        'Contributed to AI-driven and full-stack apps with React, Node, MongoDB, and Python; built a predictive analytics dashboard bridging ML and UI/UX; collaborated across teams on end-to-end delivery.',
+      skills: ['React.js', 'Node.js', 'MongoDB', 'Python', 'ML & Analytics UI'],
+      bgColor: 'from-purple-50 to-pink-50',
+      borderColor: 'border-purple-200',
+      textColor: 'text-purple-900',
     },
     {
       role: 'Full Stack Development Intern',
       company: 'Pursue Today',
-      duration: '2025',
+      duration: 'June 2025 – August 2025',
       type: 'Internship',
       icon: '💻',
-      description: 'Developed interactive web apps integrating AI-powered features. Collaborated with design and marketing teams to optimize UX for campaign landing pages.',
-      skills: ['React.js', 'Node.js', 'AI Integration', 'UX Design'],
+      description:
+        'Shipped full-stack web work with JavaScript, React, Node, and Python; implemented CI/CD and automation; built features around LLMs and generative AI in agile delivery.',
+      skills: ['JavaScript', 'React', 'Node.js', 'Python', 'CI/CD', 'LLMs'],
       bgColor: 'from-green-50 to-emerald-50',
       borderColor: 'border-green-200',
-      textColor: 'text-green-900'
-    },
-    {
-      role: 'AI & Full-Stack Development Intern',
-      company: 'Meraki Matrix Pvt Limited',
-      duration: 'Jun 2, 2025 – Oct 24, 2025',
-      type: 'Internship',
-      icon: '🎨',
-      description: 'Completed a hybrid internship in AI and Full-Stack Development, delivering full-stack features and a predictive analytics dashboard.',
-      skills: ['React.js', 'Node.js', 'MongoDB', 'Python', 'AI Integration'],
-      bgColor: 'from-purple-50 to-pink-50',
-      borderColor: 'border-purple-200',
-      textColor: 'text-purple-900'
+      textColor: 'text-green-900',
     },
     {
       role: 'Operations & Business Analytics Intern',
       company: 'Aura Active',
-      duration: 'Mar 4, 2025 – May 30, 2025',
+      duration: 'March 2025 – May 2025',
       type: 'Internship',
       icon: '📊',
-      description: 'Supported inventory, forecasting, and dashboard reporting with analytics-focused operations improvements.',
-      skills: ['Excel', 'Google Workspace', 'Forecasting', 'Data Visualization'],
+      description:
+        'Analyzed inventory, sales, and supplier data; built dashboards and forecasts; applied business analytics to improve efficiency and alignment in a results-driven setting.',
+      skills: ['Operations Analytics', 'Dashboards', 'Forecasting', 'Visualization'],
       bgColor: 'from-amber-50 to-yellow-50',
       borderColor: 'border-amber-200',
-      textColor: 'text-amber-900'
-    }
+      textColor: 'text-amber-900',
+    },
+    {
+      role: 'Operations & Business Analytics Intern',
+      company: 'The Cartel Foods (Gloria Jean’s Coffee)',
+      duration: 'January 2024 – February 2025',
+      type: 'Internship',
+      icon: '☕',
+      description:
+        'Supported decisions with inventory, sales, and supplier analysis; delivered Excel and visualization-based dashboards; applied BI and forecasting to streamline operations.',
+      skills: ['Excel', 'Google Workspace', 'BI', 'Demand Forecasting', 'Process Optimization'],
+      bgColor: 'from-rose-50 to-pink-50',
+      borderColor: 'border-rose-200',
+      textColor: 'text-rose-900',
+    },
   ];
 
   return (
-    <section id="experience" className="bg-projects text-gray-900 py-24 px-6 md:px-12">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Section-specific butterflies */}
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={`experience-butterfly-${i}`}
-            className="absolute animate-float opacity-25"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 4}s`,
-              animationDuration: `${14 + Math.random() * 6}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+    <section id="experience" className="relative bg-projects text-gray-900 py-24 px-6 md:px-12">
+      <ExperienceFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -112,7 +117,7 @@ export default function Experience() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -128,7 +133,7 @@ export default function Experience() {
           {featuredExperiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
@@ -203,7 +208,7 @@ export default function Experience() {
 
         {/* Additional Experience Highlight */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -211,17 +216,7 @@ export default function Experience() {
         >
           <div className="text-center">
             <h3 className="text-2xl font-black text-gray-800 mb-4">Other Notable Roles</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-2xl border border-amber-200">
-                <div className="text-2xl mb-2">📊</div>
-                <h4 className="font-bold text-amber-900">Operations & Business Analytics Intern</h4>
-                <p className="text-amber-800 text-sm">The Cartel Foods</p>
-              </div>
-              <div className="bg-gradient-to-r from-rose-50 to-pink-50 p-6 rounded-2xl border border-rose-200">
-                <div className="text-2xl mb-2">👗</div>
-                <h4 className="font-bold text-rose-900">Operations & Business Analytics Intern</h4>
-                <p className="text-rose-800 text-sm">Aura Active</p>
-              </div>
+            <div className="grid md:grid-cols-1 max-w-md mx-auto gap-6">
               <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-200">
                 <div className="text-2xl mb-2">✍️</div>
                 <h4 className="font-bold text-green-900">Website Owner & Blogger</h4>
@@ -233,7 +228,7 @@ export default function Experience() {
 
         {/* Experience Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -261,7 +256,7 @@ export default function Experience() {
 
         {/* View More Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           viewport={{ once: true }}

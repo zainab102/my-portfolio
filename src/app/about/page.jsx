@@ -1,30 +1,20 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import * as Accordion from '@radix-ui/react-accordion';
-import Image from 'next/image';
 import Link from 'next/link';
+import WebEducatorsEducationPanel from '@/components/WebEducatorsEducationPanel';
+
+const AboutPageButterflies = dynamic(() => import('./AboutPageButterflies'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function AboutPage() {
   return (
     <section id="about" className="bg-about text-gray-900 py-24 px-6 md:px-12 relative overflow-hidden">
-      {/* Animated Butterflies */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={`butterfly-${i}`}
-            className="absolute animate-float opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 2}s`,
-              animationDuration: `${10 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter drop-shadow-sm">🦋</div>
-          </div>
-        ))}
-      </div>
+      <AboutPageButterflies />
 
       {/* Background Blobs */}
       <div className="absolute inset-0 opacity-20">
@@ -35,7 +25,7 @@ export default function AboutPage() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -50,7 +40,7 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left Column: Intro */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
@@ -100,7 +90,7 @@ export default function AboutPage() {
 
           {/* Right Column: Education Accordion */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
@@ -143,13 +133,7 @@ export default function AboutPage() {
                     </Accordion.Trigger>
                   </Accordion.Header>
                   <Accordion.Content className="px-6 pt-4 pb-2">
-                    <div className="bg-green-50/50 rounded-xl p-6 border border-green-100">
-                      <div className="flex items-center justify-between mb-3">
-                        <p className="font-bold text-green-800 text-lg">Full Stack Development + AI/ML</p>
-                        <span className="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">2025 – 2026</span>
-                      </div>
-                      <p className="text-green-700 leading-relaxed">Frontend/backend training (HTML, JS, React, Node.js, MongoDB) and AI/ML projects for intelligent apps.</p>
-                    </div>
+                    <WebEducatorsEducationPanel />
                   </Accordion.Content>
                 </Accordion.Item>
 
@@ -178,7 +162,7 @@ export default function AboutPage() {
 
         {/* Skills Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
@@ -208,9 +192,10 @@ export default function AboutPage() {
 
 {/* Back to Home Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           className="text-center mt-12"
         >
           <Link

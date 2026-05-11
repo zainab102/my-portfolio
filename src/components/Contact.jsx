@@ -1,8 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaCalendarAlt } from 'react-icons/fa';
+
+const ContactFloatDecor = dynamic(() => import('@/components/decor/ContactFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgvzkepb';
 
@@ -83,25 +89,7 @@ export default function Contact() {
       id="contact"
       className="bg-contact text-gray-900 py-24 px-6 md:px-12 relative"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={`contact-butterfly-${i}`}
-            className="absolute animate-float opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 5}s`,
-              animationDuration: `${18 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+      <ContactFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -112,7 +100,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -125,7 +113,7 @@ export default function Contact() {
 
         {/* Introduction */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -153,7 +141,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
@@ -288,7 +276,7 @@ export default function Contact() {
 
           {/* Contact Methods & Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}

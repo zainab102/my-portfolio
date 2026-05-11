@@ -20,7 +20,7 @@ export default function ExperienceSection() {
     <section id="experience" className="bg-about py-24 px-6 md:px-12 text-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -33,7 +33,7 @@ export default function ExperienceSection() {
 
         {/* Tab Navigation */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
@@ -63,7 +63,7 @@ export default function ExperienceSection() {
         {/* Tab Content */}
         <motion.div
           key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mt-8"

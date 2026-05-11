@@ -1,7 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const SkillsPageFloatDecor = dynamic(() => import('@/components/decor/SkillsPageFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Skills() {
   const featuredTechnicalSkills = [
@@ -55,27 +61,8 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="bg-skills text-gray-900 py-24 px-6">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Section-specific butterflies */}
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`skills-butterfly-${i}`}
-            className="absolute animate-float opacity-25"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 4}s`,
-              animationDuration: `${14 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+    <section id="skills" className="relative bg-skills text-gray-900 py-24 px-6">
+      <SkillsPageFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -86,7 +73,7 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -99,7 +86,7 @@ export default function Skills() {
 
         {/* Skills Overview Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -131,7 +118,7 @@ export default function Skills() {
 
         {/* Technical Skills with Progress */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={false}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
@@ -199,7 +186,7 @@ export default function Skills() {
 
         {/* Soft Skills */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -248,7 +235,7 @@ export default function Skills() {
 
         {/* Skill Categories Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -283,7 +270,7 @@ export default function Skills() {
 
         {/* Learning & Growth Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           viewport={{ once: true }}
@@ -351,7 +338,7 @@ export default function Skills() {
 
         {/* Skills Highlights */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
           viewport={{ once: true }}
@@ -382,7 +369,7 @@ export default function Skills() {
 
         {/* Back to Home Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mt-12"

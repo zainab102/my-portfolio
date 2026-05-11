@@ -1,8 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const ProjectsFloatDecor = dynamic(() => import('@/components/decor/ProjectsFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Projects() {
   const githubSearchLink = (query) =>
@@ -125,27 +131,8 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="bg-projects text-gray-900 py-24 px-6">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Section-specific butterflies */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`projects-butterfly-${i}`}
-            className="absolute animate-float opacity-25"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 3}s`,
-              animationDuration: `${12 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+    <section id="projects" className="relative bg-projects text-gray-900 py-24 px-6">
+      <ProjectsFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -156,7 +143,7 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -169,7 +156,7 @@ export default function Projects() {
 
         {/* Project Stats Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -189,7 +176,7 @@ export default function Projects() {
 
         {/* Category Filter */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
@@ -219,7 +206,7 @@ export default function Projects() {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
@@ -228,6 +215,7 @@ export default function Projects() {
               <div className={`bg-gradient-to-r ${project.bgColor} border-2 ${project.borderColor} rounded-3xl overflow-hidden light-shadow-xl hover:light-shadow-2xl transition-all duration-300 hover:scale-[1.02] h-full flex flex-col`}>
                 {/* Project Image/Icon */}
                 <div className="relative h-48 bg-gradient-to-br from-white/50 to-gray-100/50 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- dynamic placeholder URLs */}
                   <img
                     src={`https://placehold.co/400x300/${project.borderColor.includes('red') ? 'ef4444' : project.borderColor.includes('purple') ? '8b5cf6' : project.borderColor.includes('blue') ? '3b82f6' : project.borderColor.includes('green') ? '10b981' : project.borderColor.includes('amber') ? 'f59e0b' : 'f97316'}/ffffff?text=${encodeURIComponent(project.title.slice(0, 15))}`}
                     alt={`${project.title} - ${project.description.slice(0, 50)}...`}
@@ -317,7 +305,7 @@ export default function Projects() {
 
         {/* Project Categories Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -353,7 +341,7 @@ export default function Projects() {
 
         {/* Current Focus */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -380,7 +368,7 @@ export default function Projects() {
 
         {/* View More Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           viewport={{ once: true }}

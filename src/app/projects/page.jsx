@@ -1,8 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const ProjectsPageFloatDecor = dynamic(() => import('@/components/decor/ProjectsPageFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Projects() {
   const githubSearchLink = (query) =>
@@ -393,25 +399,7 @@ export default function Projects() {
       id="projects"
       className="bg-projects text-gray-900 py-24 px-6 relative overflow-hidden"
     >
-      {/* Animated butterflies in background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`butterfly-${i}`}
-            className="absolute animate-float opacity-25"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 3}s`,
-              animationDuration: `${12 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+      <ProjectsPageFloatDecor />
 
       {/* Background blobs for subtle design */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -422,7 +410,7 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.h2
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -433,7 +421,7 @@ export default function Projects() {
 
         {/* Project Stats Cards */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -457,7 +445,7 @@ export default function Projects() {
 
         {/* Category Filter Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
@@ -487,7 +475,7 @@ export default function Projects() {
           {filteredProjects.map((p, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 50 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
@@ -570,7 +558,7 @@ export default function Projects() {
 
         {/* Currently Working On Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -597,7 +585,7 @@ export default function Projects() {
 
         {/* Back to Home Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mt-12"

@@ -1,7 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const CertificationsFloatDecor = dynamic(() => import('@/components/decor/CertificationsFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Certifications() {
   // Show only featured certifications on homepage
@@ -75,27 +81,8 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="bg-skills text-gray-900 py-24 px-6 md:px-12">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Section-specific butterflies */}
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`cert-butterfly-${i}`}
-            className="absolute animate-float opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 3}s`,
-              animationDuration: `${15 + Math.random() * 8}s`,
-            }}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+    <section id="certifications" className="relative bg-skills text-gray-900 py-24 px-6 md:px-12">
+      <CertificationsFloatDecor />
 
       {/* Subtle Background Shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-15">
@@ -106,7 +93,7 @@ export default function Certifications() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -119,7 +106,7 @@ export default function Certifications() {
 
         {/* Certification Stats Overview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
@@ -154,7 +141,7 @@ export default function Certifications() {
           {featuredCertifications.map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.3 }}
               viewport={{ once: true }}
@@ -221,7 +208,7 @@ export default function Certifications() {
 
         {/* Skills Gained from Certifications */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
@@ -261,7 +248,7 @@ export default function Certifications() {
 
         {/* Certification Timeline Preview */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
@@ -291,7 +278,7 @@ export default function Certifications() {
 
         {/* View More Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           viewport={{ once: true }}

@@ -37,7 +37,7 @@ export default function BlogsPage() {
       <div className="grid gap-6 md:grid-cols-3">
         {blogs.map((blog, i) => (
           <div
-            key={blog._id || i}
+            key={blog.slug || blog.id || `blog-${i}`}
             className="p-6 bg-white/10 rounded-lg hover:bg-white/20 transition"
           >
             <h3 className="text-xl font-semibold">{blog.title}</h3>

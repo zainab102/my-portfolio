@@ -1,18 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaHeart, FaRocket, FaCode } from 'react-icons/fa';
+
+const FooterFloatDecor = dynamic(() => import('@/components/decor/FooterFloatDecor'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Footer() {
   const quickLinks = [
     { name: 'About', href: '/#about' },
     { name: 'Experience', href: '/#experience' },
+    { name: 'Certifications', href: '/#certifications' },
+    { name: 'Leadership', href: '/#leadership' },
     { name: 'Projects', href: '/#projects' },
     { name: 'Documents', href: '/documents' },
     { name: 'Skills', href: '/#skills' },
     { name: 'Blogs', href: '/blogs' },
-    { name: 'Contact', href: '/#contact' }
+    { name: 'Contact', href: '/#contact' },
   ];
 
   const socialLinks = [
@@ -39,40 +47,15 @@ export default function Footer() {
     }
   ];
 
-  const [butterflies, setButterflies] = useState([]);
-
-  useEffect(() => {
-    const generated = [...Array(3)].map((_, i) => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${i * 6}s`,
-      animationDuration: `${20 + Math.random() * 10}s`
-    }));
-    setButterflies(generated);
-  }, []);
-
   return (
     <footer className="bg-gradient-to-br from-gray-50 via-white to-cream-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-gray-100 py-20 px-6 border-t-2 border-gray-200 dark:border-gray-700 relative">
       
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {butterflies.map((style, i) => (
-          <div
-            key={`footer-butterfly-${i}`}
-            className="absolute animate-float opacity-20"
-            style={style}
-          >
-            <div className="text-lg animate-wing-flutter filter drop-shadow-sm">
-              🦋
-            </div>
-          </div>
-        ))}
-      </div>
+      <FooterFloatDecor />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Inspirational Quote */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
@@ -96,7 +79,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Branding */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
@@ -137,7 +120,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
@@ -150,13 +133,14 @@ export default function Footer() {
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
-                    <a
+                    <Link
                       href={link.href}
-                      className={`flex items-center text-gray-600 dark:text-gray-300 ${socialLinks.color} hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 group py-2`}
+                      scroll={!link.href.includes('#')}
+                      className="flex items-center text-gray-600 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 group py-2"
                     >
                       <div className="w-2 h-2 bg-amber-500 rounded-full mr-3 group-hover:bg-rose-500 transition-colors"></div>
                       <span className="font-semibold group-hover:translate-x-1 transition-transform">{link.name}</span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -165,7 +149,7 @@ export default function Footer() {
 
           {/* Let's Connect */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
@@ -199,7 +183,7 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
