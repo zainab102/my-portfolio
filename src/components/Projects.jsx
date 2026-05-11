@@ -10,6 +10,16 @@ const ProjectsFloatDecor = dynamic(() => import('@/components/decor/ProjectsFloa
   loading: () => null,
 });
 
+function projectCardHeroGradient(project) {
+  const bc = project.borderColor || '';
+  if (bc.includes('red')) return 'from-red-500 to-rose-600';
+  if (bc.includes('purple')) return 'from-purple-600 to-indigo-700';
+  if (bc.includes('blue')) return 'from-blue-500 to-cyan-600';
+  if (bc.includes('green')) return 'from-green-500 to-emerald-600';
+  if (bc.includes('amber')) return 'from-amber-500 to-orange-600';
+  return 'from-orange-500 to-rose-600';
+}
+
 export default function Projects() {
   const githubSearchLink = (query) =>
     `https://github.com/search?q=user%3Azainab102+${encodeURIComponent(query)}&type=repositories`;
@@ -205,7 +215,7 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {filteredProjects.map((project, index) => (
             <motion.div
-              key={index}
+              key={`${project.title}-${index}`}
               initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -213,23 +223,11 @@ export default function Projects() {
               className="group"
             >
               <div className={`bg-gradient-to-r ${project.bgColor} border-2 ${project.borderColor} rounded-3xl overflow-hidden light-shadow-xl hover:light-shadow-2xl transition-all duration-300 hover:scale-[1.02] h-full flex flex-col`}>
-                {/* Project Image/Icon */}
-                <div className="relative h-48 bg-gradient-to-br from-white/50 to-gray-100/50 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- dynamic placeholder URLs */}
-                  <img
-                    src={`https://placehold.co/400x300/${project.borderColor.includes('red') ? 'ef4444' : project.borderColor.includes('purple') ? '8b5cf6' : project.borderColor.includes('blue') ? '3b82f6' : project.borderColor.includes('green') ? '10b981' : project.borderColor.includes('amber') ? 'f59e0b' : 'f97316'}/ffffff?text=${encodeURIComponent(project.title.slice(0, 15))}`}
-                    alt={`${project.title} - ${project.description.slice(0, 50)}...`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  
-                  {/* Project Icon Overlay */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-2xl light-shadow">
-                    {project.icon}
-                  </div>
-
-                  {/* Status Badge */}
-                  <div className="absolute top-4 left-4">
+                {/* Card hero: full title (placeholder images truncated long names) */}
+                <div
+                  className={`relative min-h-[12rem] flex flex-col items-center justify-center px-4 py-8 bg-gradient-to-br ${projectCardHeroGradient(project)}`}
+                >
+                  <div className="absolute top-4 left-4 z-10">
                     <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
                       project.status === 'Completed' ? 'bg-green-200 text-green-800 border-green-300' :
                       project.status === 'In Progress' ? 'bg-blue-200 text-blue-800 border-blue-300' :
@@ -238,6 +236,14 @@ export default function Projects() {
                       {project.status}
                     </span>
                   </div>
+
+                  <div className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-2xl light-shadow">
+                    {project.icon}
+                  </div>
+
+                  <h3 className="relative z-10 mt-6 text-white font-black text-center text-base sm:text-lg md:text-xl leading-snug max-w-full break-words px-2 drop-shadow-md">
+                    {project.title}
+                  </h3>
                 </div>
 
                 {/* Project Content */}

@@ -489,7 +489,7 @@ export default function Projects() {
                 >
                   <div className="absolute inset-0 bg-black/10 rounded-t-3xl pointer-events-none"></div>
                   <h3
-                    className={`z-10 text-2xl font-extrabold tracking-tight text-center ${p.textColor} select-none`}
+                    className={`z-10 text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-center max-w-full break-words px-3 leading-tight ${p.textColor} select-none`}
                   >
                     {p.title}
                   </h3>

@@ -78,6 +78,29 @@ export default function Navbar() {
 
   const linkScroll = (href) => !href.includes('#');
 
+  /** Same-page hash links do not navigate with Next `<Link>`; scroll manually. */
+  function handleNavClick(e, href) {
+    setMenuOpen(false);
+    if (href === '/') {
+      if (pathname === '/') {
+        e.preventDefault();
+        window.history.replaceState(null, '', '/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setScrollSection('hero');
+      }
+      return;
+    }
+    if (href.startsWith('/#')) {
+      const id = href.slice(2);
+      if (pathname === '/') {
+        e.preventDefault();
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.replaceState(null, '', href);
+        setScrollSection(id);
+      }
+    }
+  }
+
   const baseLinkClass = `relative px-3 py-2 rounded-md transition-colors duration-200`;
 
   return (
@@ -90,7 +113,7 @@ export default function Navbar() {
         <Link
           href="/"
           className="text-[var(--color-primary)] dark:text-amber-400 font-bold text-xl"
-          onClick={() => setMenuOpen(false)}
+          onClick={(e) => handleNavClick(e, '/')}
         >
           Zainab
         </Link>
@@ -103,7 +126,7 @@ export default function Navbar() {
                 <Link
                   href={href}
                   scroll={linkScroll(href)}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, href)}
                   className={`${baseLinkClass}
                     ${isActive
                       ? 'text-[var(--color-primary)] font-semibold dark:text-amber-400'
@@ -144,7 +167,7 @@ export default function Navbar() {
                   <Link
                     href={href}
                     scroll={linkScroll(href)}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(e) => handleNavClick(e, href)}
                     className={`${baseLinkClass} block
                       ${isActive
                         ? 'text-[var(--color-primary)] font-semibold dark:text-amber-400'

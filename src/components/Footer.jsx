@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaHeart, FaRocket, FaCode } from 'react-icons/fa';
@@ -11,6 +12,18 @@ const FooterFloatDecor = dynamic(() => import('@/components/decor/FooterFloatDec
 });
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  function handleQuickLinkClick(e, href) {
+    if (!href.startsWith('/#')) return;
+    if (pathname === '/') {
+      e.preventDefault();
+      const id = href.slice(2);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.history.replaceState(null, '', href);
+    }
+  }
+
   const quickLinks = [
     { name: 'About', href: '/#about' },
     { name: 'Experience', href: '/#experience' },
@@ -131,11 +144,12 @@ export default function Footer() {
                 Quick Links
               </h3>
               <ul className="space-y-3">
-                {quickLinks.map((link, index) => (
-                  <li key={index}>
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
                     <Link
                       href={link.href}
                       scroll={!link.href.includes('#')}
+                      onClick={(e) => handleQuickLinkClick(e, link.href)}
                       className="flex items-center text-gray-600 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 group py-2"
                     >
                       <div className="w-2 h-2 bg-amber-500 rounded-full mr-3 group-hover:bg-rose-500 transition-colors"></div>

@@ -21,31 +21,31 @@ export default function Home() {
         <Hero />
       </section>
 
-      <section id="about" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <About />
       </section>
 
-      <section id="experience" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Experience />
       </section>
 
-      <section id="certifications" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Certifications />
       </section>
 
-      <section id="leadership" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Leadership />
       </section>
 
-      <section id="projects" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Projects />
       </section>
 
-      <section id="skills" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Skills />
       </section>
 
-      <section id="blogs" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <h2 className="text-4xl font-bold mb-8 text-[var(--color-primary)] dark:text-white text-center">Blogs</h2>
         <BlogsPreview limit={3} />
         <div className="text-center mt-6">
@@ -55,7 +55,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12">
         <Contact />
         <div className="text-center mt-6">
           <Link href="/contact" className="text-[var(--color-accent)] font-semibold hover:underline">

@@ -26,6 +26,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fixed navbar (~6rem) — hash links and scrollIntoView land below the header */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 body {
   @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans m-0 p-0;
   line-height: 1.75;
